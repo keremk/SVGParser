@@ -1,0 +1,388 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BD3F102F12501A0400ED816C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3F102E12501A0400ED816C /* Foundation.framework */; };
+		BD8435D9125062EA00C0472D /* SVGParserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8435D8125062EA00C0472D /* SVGParserTest.m */; };
+		BD8435DE12506C7000C0472D /* SVGGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8435DD12506C7000C0472D /* SVGGroup.m */; };
+		BD8435DF12506C7000C0472D /* SVGGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = BD8435DC12506C7000C0472D /* SVGGroup.h */; };
+		BD8435E012506C7000C0472D /* SVGGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8435DD12506C7000C0472D /* SVGGroup.m */; };
+		BD8435E212519BE000C0472D /* SVGShapes.h in Headers */ = {isa = PBXBuildFile; fileRef = BD8435E112519BE000C0472D /* SVGShapes.h */; };
+		BD84363712519CB200C0472D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD84363612519CB200C0472D /* CoreGraphics.framework */; };
+		BD84365C1251AE3D00C0472D /* SVGParser.m in Sources */ = {isa = PBXBuildFile; fileRef = BD84365A1251AE3D00C0472D /* SVGParser.m */; };
+		BD84365D1251AE3D00C0472D /* SVGParser.m in Sources */ = {isa = PBXBuildFile; fileRef = BD84365A1251AE3D00C0472D /* SVGParser.m */; };
+		BD84365E1251AE3D00C0472D /* SVGParser.h in Headers */ = {isa = PBXBuildFile; fileRef = BD84365B1251AE3D00C0472D /* SVGParser.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		BD3F102C12501A0400ED816C /* libSVGParser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSVGParser.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD3F102E12501A0400ED816C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BD3F103012501A0400ED816C /* SVGParser_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SVGParser_Prefix.pch; sourceTree = "<group>"; };
+		BD8435CE1250627F00C0472D /* SVGUnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SVGUnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD8435CF1250627F00C0472D /* SVGUnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SVGUnitTests-Info.plist"; sourceTree = "<group>"; };
+		BD8435D7125062EA00C0472D /* SVGParserTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGParserTest.h; sourceTree = "<group>"; };
+		BD8435D8125062EA00C0472D /* SVGParserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVGParserTest.m; sourceTree = "<group>"; };
+		BD8435DC12506C7000C0472D /* SVGGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGGroup.h; sourceTree = "<group>"; };
+		BD8435DD12506C7000C0472D /* SVGGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVGGroup.m; sourceTree = "<group>"; };
+		BD8435E112519BE000C0472D /* SVGShapes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGShapes.h; sourceTree = "<group>"; };
+		BD84363612519CB200C0472D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		BD84365A1251AE3D00C0472D /* SVGParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVGParser.m; sourceTree = "<group>"; };
+		BD84365B1251AE3D00C0472D /* SVGParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGParser.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BD3F102912501A0400ED816C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD3F102F12501A0400ED816C /* Foundation.framework in Frameworks */,
+				BD84363712519CB200C0472D /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BD8435CB1250627F00C0472D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BD3F101E12501A0400ED816C = {
+			isa = PBXGroup;
+			children = (
+				BD8435D61250629900C0472D /* UnitTestClasses */,
+				BD3F102512501A0400ED816C /* Classes */,
+				BD3F102612501A0400ED816C /* Other Sources */,
+				BD3F102712501A0400ED816C /* Frameworks */,
+				BD3F102D12501A0400ED816C /* Products */,
+				BD8435CF1250627F00C0472D /* SVGUnitTests-Info.plist */,
+			);
+			sourceTree = "<group>";
+		};
+		BD3F102512501A0400ED816C /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				BD84365A1251AE3D00C0472D /* SVGParser.m */,
+				BD84365B1251AE3D00C0472D /* SVGParser.h */,
+				BD8435DC12506C7000C0472D /* SVGGroup.h */,
+				BD8435DD12506C7000C0472D /* SVGGroup.m */,
+				BD8435E112519BE000C0472D /* SVGShapes.h */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		BD3F102612501A0400ED816C /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				BD3F103012501A0400ED816C /* SVGParser_Prefix.pch */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		BD3F102712501A0400ED816C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BD3F102E12501A0400ED816C /* Foundation.framework */,
+				BD84363612519CB200C0472D /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BD3F102D12501A0400ED816C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BD3F102C12501A0400ED816C /* libSVGParser.a */,
+				BD8435CE1250627F00C0472D /* SVGUnitTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BD8435D61250629900C0472D /* UnitTestClasses */ = {
+			isa = PBXGroup;
+			children = (
+				BD8435D7125062EA00C0472D /* SVGParserTest.h */,
+				BD8435D8125062EA00C0472D /* SVGParserTest.m */,
+			);
+			path = UnitTestClasses;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		BD3F102A12501A0400ED816C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD8435DF12506C7000C0472D /* SVGGroup.h in Headers */,
+				BD8435E212519BE000C0472D /* SVGShapes.h in Headers */,
+				BD84365E1251AE3D00C0472D /* SVGParser.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		BD3F102B12501A0400ED816C /* SVGParser */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BD3F103312501A0400ED816C /* Build configuration list for PBXNativeTarget "SVGParser" */;
+			buildPhases = (
+				BD3F102812501A0400ED816C /* Sources */,
+				BD3F102912501A0400ED816C /* Frameworks */,
+				BD3F102A12501A0400ED816C /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SVGParser;
+			productName = SVGParser;
+			productReference = BD3F102C12501A0400ED816C /* libSVGParser.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		BD8435CD1250627F00C0472D /* SVGUnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BD8435D21250628000C0472D /* Build configuration list for PBXNativeTarget "SVGUnitTests" */;
+			buildPhases = (
+				BD8435C91250627F00C0472D /* Resources */,
+				BD8435CA1250627F00C0472D /* Sources */,
+				BD8435CB1250627F00C0472D /* Frameworks */,
+				BD8435CC1250627F00C0472D /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SVGUnitTests;
+			productName = SVGUnitTests;
+			productReference = BD8435CE1250627F00C0472D /* SVGUnitTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BD3F102012501A0400ED816C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Coding Ventures";
+			};
+			buildConfigurationList = BD3F102312501A0400ED816C /* Build configuration list for PBXProject "SVGParser" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = BD3F101E12501A0400ED816C;
+			productRefGroup = BD3F102D12501A0400ED816C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BD3F102B12501A0400ED816C /* SVGParser */,
+				BD8435CD1250627F00C0472D /* SVGUnitTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BD8435C91250627F00C0472D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BD8435CC1250627F00C0472D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BD3F102812501A0400ED816C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD8435E012506C7000C0472D /* SVGGroup.m in Sources */,
+				BD84365D1251AE3D00C0472D /* SVGParser.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BD8435CA1250627F00C0472D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD8435D9125062EA00C0472D /* SVGParserTest.m in Sources */,
+				BD8435DE12506C7000C0472D /* SVGGroup.m in Sources */,
+				BD84365C1251AE3D00C0472D /* SVGParser.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		BD3F103112501A0400ED816C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
+				PREBINDING = NO;
+				SDKROOT = iphoneos4.1;
+			};
+			name = Debug;
+		};
+		BD3F103212501A0400ED816C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
+				PREBINDING = NO;
+				SDKROOT = iphoneos4.1;
+			};
+			name = Release;
+		};
+		BD3F103412501A0400ED816C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DSTROOT = /tmp/SVGParser.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = SVGParser_Prefix.pch;
+				INSTALL_PATH = /usr/local/lib;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = SVGParser;
+			};
+			name = Debug;
+		};
+		BD3F103512501A0400ED816C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DSTROOT = /tmp/SVGParser.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = SVGParser_Prefix.pch;
+				INSTALL_PATH = /usr/local/lib;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = SVGParser;
+			};
+			name = Release;
+		};
+		BD8435D01250628000C0472D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INFOPLIST_FILE = "SVGUnitTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					SenTestingKit,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = SVGUnitTests;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		BD8435D11250628000C0472D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				INFOPLIST_FILE = "SVGUnitTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					SenTestingKit,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = SVGUnitTests;
+				WRAPPER_EXTENSION = octest;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BD3F102312501A0400ED816C /* Build configuration list for PBXProject "SVGParser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BD3F103112501A0400ED816C /* Debug */,
+				BD3F103212501A0400ED816C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BD3F103312501A0400ED816C /* Build configuration list for PBXNativeTarget "SVGParser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BD3F103412501A0400ED816C /* Debug */,
+				BD3F103512501A0400ED816C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BD8435D21250628000C0472D /* Build configuration list for PBXNativeTarget "SVGUnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BD8435D01250628000C0472D /* Debug */,
+				BD8435D11250628000C0472D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BD3F102012501A0400ED816C /* Project object */;
+}
