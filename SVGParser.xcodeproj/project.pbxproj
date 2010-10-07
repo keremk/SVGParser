@@ -7,19 +7,67 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD0D2C0E1255629300127DAD /* SVGParserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8435D8125062EA00C0472D /* SVGParserTest.m */; };
+		BD0D2C0F1255629300127DAD /* SVGGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8435DD12506C7000C0472D /* SVGGroup.m */; };
+		BD0D2C101255629300127DAD /* SVGParser.m in Sources */ = {isa = PBXBuildFile; fileRef = BD84365A1251AE3D00C0472D /* SVGParser.m */; };
+		BD0D2C8412557FA000127DAD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD84363612519CB200C0472D /* CoreGraphics.framework */; };
+		BD0D2C8512557FA000127DAD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3F102E12501A0400ED816C /* Foundation.framework */; };
+		BD0D2C8612557FB400127DAD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD84363612519CB200C0472D /* CoreGraphics.framework */; };
+		BD0D2C8712557FB400127DAD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3F102E12501A0400ED816C /* Foundation.framework */; };
+		BD0D2CC312559A5100127DAD /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD0D2CC212559A5100127DAD /* SenTestingKit.framework */; };
+		BD0D2D441259CFCA00127DAD /* SVGRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0D2D431259CFCA00127DAD /* SVGRenderer.m */; };
+		BD0D2D451259CFCA00127DAD /* SVGRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = BD0D2D421259CFCA00127DAD /* SVGRenderer.h */; };
+		BD0D2D461259CFCA00127DAD /* SVGRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0D2D431259CFCA00127DAD /* SVGRenderer.m */; };
+		BD0D2D471259CFCA00127DAD /* SVGRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0D2D431259CFCA00127DAD /* SVGRenderer.m */; };
+		BD0D2D4A125BCDE800127DAD /* SVGShapes.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0D2D49125BCDE800127DAD /* SVGShapes.m */; };
+		BD0D2D4B125BCDE800127DAD /* SVGShapes.h in Headers */ = {isa = PBXBuildFile; fileRef = BD0D2D48125BCDE800127DAD /* SVGShapes.h */; };
+		BD0D2D4C125BCDE800127DAD /* SVGShapes.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0D2D49125BCDE800127DAD /* SVGShapes.m */; };
+		BD0D2D4D125BCDE800127DAD /* SVGShapes.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0D2D49125BCDE800127DAD /* SVGShapes.m */; };
+		BD0D2D92125C5D9300127DAD /* SVGStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0D2D91125C5D9300127DAD /* SVGStyle.m */; };
+		BD0D2D93125C5D9300127DAD /* SVGStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = BD0D2D90125C5D9300127DAD /* SVGStyle.h */; };
+		BD0D2D94125C5D9300127DAD /* SVGStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0D2D91125C5D9300127DAD /* SVGStyle.m */; };
+		BD0D2D95125C5D9300127DAD /* SVGStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0D2D91125C5D9300127DAD /* SVGStyle.m */; };
+		BD0D2DD9125D2EEE00127DAD /* UIColor-Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0D2DD8125D2EEE00127DAD /* UIColor-Expanded.m */; };
+		BD0D2DDA125D2EEE00127DAD /* UIColor-Expanded.h in Headers */ = {isa = PBXBuildFile; fileRef = BD0D2DD7125D2EEE00127DAD /* UIColor-Expanded.h */; };
+		BD0D2DDB125D2EEE00127DAD /* UIColor-Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0D2DD8125D2EEE00127DAD /* UIColor-Expanded.m */; };
+		BD0D2DDC125D2EEE00127DAD /* UIColor-Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0D2DD8125D2EEE00127DAD /* UIColor-Expanded.m */; };
+		BD0D2DDE125D2FC800127DAD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD0D2DDD125D2FC800127DAD /* UIKit.framework */; };
 		BD3F102F12501A0400ED816C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3F102E12501A0400ED816C /* Foundation.framework */; };
 		BD8435D9125062EA00C0472D /* SVGParserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8435D8125062EA00C0472D /* SVGParserTest.m */; };
 		BD8435DE12506C7000C0472D /* SVGGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8435DD12506C7000C0472D /* SVGGroup.m */; };
 		BD8435DF12506C7000C0472D /* SVGGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = BD8435DC12506C7000C0472D /* SVGGroup.h */; };
 		BD8435E012506C7000C0472D /* SVGGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8435DD12506C7000C0472D /* SVGGroup.m */; };
-		BD8435E212519BE000C0472D /* SVGShapes.h in Headers */ = {isa = PBXBuildFile; fileRef = BD8435E112519BE000C0472D /* SVGShapes.h */; };
+		BD8435E212519BE000C0472D /* SVGShapes1.h in Headers */ = {isa = PBXBuildFile; fileRef = BD8435E112519BE000C0472D /* SVGShapes1.h */; };
 		BD84363712519CB200C0472D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD84363612519CB200C0472D /* CoreGraphics.framework */; };
 		BD84365C1251AE3D00C0472D /* SVGParser.m in Sources */ = {isa = PBXBuildFile; fileRef = BD84365A1251AE3D00C0472D /* SVGParser.m */; };
 		BD84365D1251AE3D00C0472D /* SVGParser.m in Sources */ = {isa = PBXBuildFile; fileRef = BD84365A1251AE3D00C0472D /* SVGParser.m */; };
 		BD84365E1251AE3D00C0472D /* SVGParser.h in Headers */ = {isa = PBXBuildFile; fileRef = BD84365B1251AE3D00C0472D /* SVGParser.h */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		BD0D2CB41255914A00127DAD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BD3F102012501A0400ED816C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BD3F102B12501A0400ED816C /* SVGParser */;
+			remoteInfo = SVGParser;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		BD0D2C161255629300127DAD /* SVGUnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SVGUnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD0D2C171255629300127DAD /* SVGUnitTests-Info copy.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SVGUnitTests-Info copy.plist"; sourceTree = "<group>"; };
+		BD0D2CBE1255967600127DAD /* TestUnitTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TestUnitTest-Info.plist"; sourceTree = "<group>"; };
+		BD0D2CC212559A5100127DAD /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/Developer/Library/Frameworks/SenTestingKit.framework; sourceTree = "<absolute>"; };
+		BD0D2D421259CFCA00127DAD /* SVGRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGRenderer.h; sourceTree = "<group>"; };
+		BD0D2D431259CFCA00127DAD /* SVGRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVGRenderer.m; sourceTree = "<group>"; };
+		BD0D2D48125BCDE800127DAD /* SVGShapes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGShapes.h; sourceTree = "<group>"; };
+		BD0D2D49125BCDE800127DAD /* SVGShapes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVGShapes.m; sourceTree = "<group>"; };
+		BD0D2D90125C5D9300127DAD /* SVGStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGStyle.h; sourceTree = "<group>"; };
+		BD0D2D91125C5D9300127DAD /* SVGStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVGStyle.m; sourceTree = "<group>"; };
+		BD0D2DD7125D2EEE00127DAD /* UIColor-Expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor-Expanded.h"; sourceTree = "<group>"; };
+		BD0D2DD8125D2EEE00127DAD /* UIColor-Expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor-Expanded.m"; sourceTree = "<group>"; };
+		BD0D2DDD125D2FC800127DAD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BD3F102C12501A0400ED816C /* libSVGParser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSVGParser.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD3F102E12501A0400ED816C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BD3F103012501A0400ED816C /* SVGParser_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SVGParser_Prefix.pch; sourceTree = "<group>"; };
@@ -29,13 +77,24 @@
 		BD8435D8125062EA00C0472D /* SVGParserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVGParserTest.m; sourceTree = "<group>"; };
 		BD8435DC12506C7000C0472D /* SVGGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGGroup.h; sourceTree = "<group>"; };
 		BD8435DD12506C7000C0472D /* SVGGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVGGroup.m; sourceTree = "<group>"; };
-		BD8435E112519BE000C0472D /* SVGShapes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGShapes.h; sourceTree = "<group>"; };
+		BD8435E112519BE000C0472D /* SVGShapes1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGShapes1.h; sourceTree = "<group>"; };
 		BD84363612519CB200C0472D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		BD84365A1251AE3D00C0472D /* SVGParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVGParser.m; sourceTree = "<group>"; };
 		BD84365B1251AE3D00C0472D /* SVGParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGParser.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		BD0D2C111255629300127DAD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD0D2C8612557FB400127DAD /* CoreGraphics.framework in Frameworks */,
+				BD0D2C8712557FB400127DAD /* Foundation.framework in Frameworks */,
+				BD0D2CC312559A5100127DAD /* SenTestingKit.framework in Frameworks */,
+				BD0D2DDE125D2FC800127DAD /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BD3F102912501A0400ED816C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -49,12 +108,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD0D2C8412557FA000127DAD /* CoreGraphics.framework in Frameworks */,
+				BD0D2C8512557FA000127DAD /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BD0D2DD6125D2EB600127DAD /* UIColorUtils */ = {
+			isa = PBXGroup;
+			children = (
+				BD0D2DD7125D2EEE00127DAD /* UIColor-Expanded.h */,
+				BD0D2DD8125D2EEE00127DAD /* UIColor-Expanded.m */,
+			);
+			name = UIColorUtils;
+			sourceTree = "<group>";
+		};
 		BD3F101E12501A0400ED816C = {
 			isa = PBXGroup;
 			children = (
@@ -64,17 +134,27 @@
 				BD3F102712501A0400ED816C /* Frameworks */,
 				BD3F102D12501A0400ED816C /* Products */,
 				BD8435CF1250627F00C0472D /* SVGUnitTests-Info.plist */,
+				BD0D2C171255629300127DAD /* SVGUnitTests-Info copy.plist */,
+				BD0D2CBE1255967600127DAD /* TestUnitTest-Info.plist */,
+				BD0D2CC212559A5100127DAD /* SenTestingKit.framework */,
 			);
 			sourceTree = "<group>";
 		};
 		BD3F102512501A0400ED816C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				BD0D2DD6125D2EB600127DAD /* UIColorUtils */,
 				BD84365A1251AE3D00C0472D /* SVGParser.m */,
 				BD84365B1251AE3D00C0472D /* SVGParser.h */,
 				BD8435DC12506C7000C0472D /* SVGGroup.h */,
 				BD8435DD12506C7000C0472D /* SVGGroup.m */,
-				BD8435E112519BE000C0472D /* SVGShapes.h */,
+				BD8435E112519BE000C0472D /* SVGShapes1.h */,
+				BD0D2D421259CFCA00127DAD /* SVGRenderer.h */,
+				BD0D2D431259CFCA00127DAD /* SVGRenderer.m */,
+				BD0D2D48125BCDE800127DAD /* SVGShapes.h */,
+				BD0D2D49125BCDE800127DAD /* SVGShapes.m */,
+				BD0D2D90125C5D9300127DAD /* SVGStyle.h */,
+				BD0D2D91125C5D9300127DAD /* SVGStyle.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -92,6 +172,7 @@
 			children = (
 				BD3F102E12501A0400ED816C /* Foundation.framework */,
 				BD84363612519CB200C0472D /* CoreGraphics.framework */,
+				BD0D2DDD125D2FC800127DAD /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -101,6 +182,7 @@
 			children = (
 				BD3F102C12501A0400ED816C /* libSVGParser.a */,
 				BD8435CE1250627F00C0472D /* SVGUnitTests.octest */,
+				BD0D2C161255629300127DAD /* SVGUnitTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -122,14 +204,36 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD8435DF12506C7000C0472D /* SVGGroup.h in Headers */,
-				BD8435E212519BE000C0472D /* SVGShapes.h in Headers */,
+				BD8435E212519BE000C0472D /* SVGShapes1.h in Headers */,
 				BD84365E1251AE3D00C0472D /* SVGParser.h in Headers */,
+				BD0D2D451259CFCA00127DAD /* SVGRenderer.h in Headers */,
+				BD0D2D4B125BCDE800127DAD /* SVGShapes.h in Headers */,
+				BD0D2D93125C5D9300127DAD /* SVGStyle.h in Headers */,
+				BD0D2DDA125D2EEE00127DAD /* UIColor-Expanded.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		BD0D2C0B1255629300127DAD /* SVGUnitTests copy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BD0D2C131255629300127DAD /* Build configuration list for PBXNativeTarget "SVGUnitTests copy" */;
+			buildPhases = (
+				BD0D2C0C1255629300127DAD /* Resources */,
+				BD0D2C0D1255629300127DAD /* Sources */,
+				BD0D2C111255629300127DAD /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BD0D2CB51255914A00127DAD /* PBXTargetDependency */,
+			);
+			name = "SVGUnitTests copy";
+			productName = SVGUnitTests;
+			productReference = BD0D2C161255629300127DAD /* SVGUnitTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		BD3F102B12501A0400ED816C /* SVGParser */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BD3F103312501A0400ED816C /* Build configuration list for PBXNativeTarget "SVGParser" */;
@@ -187,11 +291,19 @@
 			targets = (
 				BD3F102B12501A0400ED816C /* SVGParser */,
 				BD8435CD1250627F00C0472D /* SVGUnitTests */,
+				BD0D2C0B1255629300127DAD /* SVGUnitTests copy */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		BD0D2C0C1255629300127DAD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BD8435C91250627F00C0472D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -218,12 +330,30 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		BD0D2C0D1255629300127DAD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD0D2C0E1255629300127DAD /* SVGParserTest.m in Sources */,
+				BD0D2C0F1255629300127DAD /* SVGGroup.m in Sources */,
+				BD0D2C101255629300127DAD /* SVGParser.m in Sources */,
+				BD0D2D471259CFCA00127DAD /* SVGRenderer.m in Sources */,
+				BD0D2D4D125BCDE800127DAD /* SVGShapes.m in Sources */,
+				BD0D2D95125C5D9300127DAD /* SVGStyle.m in Sources */,
+				BD0D2DDC125D2EEE00127DAD /* UIColor-Expanded.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BD3F102812501A0400ED816C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				BD8435E012506C7000C0472D /* SVGGroup.m in Sources */,
 				BD84365D1251AE3D00C0472D /* SVGParser.m in Sources */,
+				BD0D2D461259CFCA00127DAD /* SVGRenderer.m in Sources */,
+				BD0D2D4C125BCDE800127DAD /* SVGShapes.m in Sources */,
+				BD0D2D94125C5D9300127DAD /* SVGStyle.m in Sources */,
+				BD0D2DDB125D2EEE00127DAD /* UIColor-Expanded.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,12 +364,84 @@
 				BD8435D9125062EA00C0472D /* SVGParserTest.m in Sources */,
 				BD8435DE12506C7000C0472D /* SVGGroup.m in Sources */,
 				BD84365C1251AE3D00C0472D /* SVGParser.m in Sources */,
+				BD0D2D441259CFCA00127DAD /* SVGRenderer.m in Sources */,
+				BD0D2D4A125BCDE800127DAD /* SVGShapes.m in Sources */,
+				BD0D2D92125C5D9300127DAD /* SVGStyle.m in Sources */,
+				BD0D2DD9125D2EEE00127DAD /* UIColor-Expanded.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		BD0D2CB51255914A00127DAD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BD3F102B12501A0400ED816C /* SVGParser */;
+			targetProxy = BD0D2CB41255914A00127DAD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		BD0D2C141255629300127DAD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\\\"$(SDKROOT)/Developer/Library/Frameworks\\\"",
+					"\\\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\\\"",
+					"\"$(SDKROOT)$(DEVELOPER_FRAMEWORKS_DIR)\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INFOPLIST_FILE = "SVGUnitTests-Info copy.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					SenTestingKit,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = SVGUnitTests;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		BD0D2C151255629300127DAD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\\\"$(SDKROOT)/Developer/Library/Frameworks\\\"",
+					"\\\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\\\"",
+					"\"$(SDKROOT)$(DEVELOPER_FRAMEWORKS_DIR)\"",
+				);
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				INFOPLIST_FILE = "SVGUnitTests-Info copy.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					SenTestingKit,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = SVGUnitTests;
+				WRAPPER_EXTENSION = octest;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		BD3F103112501A0400ED816C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -355,6 +557,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		BD0D2C131255629300127DAD /* Build configuration list for PBXNativeTarget "SVGUnitTests copy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BD0D2C141255629300127DAD /* Debug */,
+				BD0D2C151255629300127DAD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		BD3F102312501A0400ED816C /* Build configuration list for PBXProject "SVGParser" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

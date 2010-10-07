@@ -7,7 +7,7 @@
 //
 
 #import "SVGParserTest.h"
-
+#import "SVGParser.h"
 
 @implementation SVGParserTest
 
@@ -21,6 +21,17 @@
 }
 
 #else                           // all code under test must be linked into the Unit Test bundle
+
+static NSString *basePath = @"/Users/kkaratal/Developer/SVGParser/SVGFiles";
+
+- (void) testLoadSVG {
+	NSString *testSVGFilename = @"Bear01.svg";
+	NSURL *svgUrl = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", basePath, testSVGFilename]];
+	SVGParser *svgParser = [[SVGParser alloc] initWithContentsOfUrl:svgUrl];
+	[svgParser parse];
+	
+	[svgParser release];
+}
 
 - (void) testMath {
     

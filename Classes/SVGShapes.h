@@ -1,14 +1,12 @@
-/*
- *  SVGShapes.h
- *  SVGParser
- *
- *  Created by Kerem Karatal on 9/27/10.
- *  Copyright 2010 Coding Ventures. All rights reserved.
- *
- */
+//
+//  SVGShapes.h
+//  SVGParser
+//
+//  Created by Kerem Karatal on 10-10-05.
+//  Copyright 2010 Coding Ventures. All rights reserved.
+//
 
-#ifndef SVGSHAPES_H_
-#define SVGSHAPES_H_
+#import <Foundation/Foundation.h>
 
 #include <CoreGraphics/CoreGraphics.h>
 
@@ -34,6 +32,43 @@ typedef struct SVGLine {
     CGPoint end;
 } SVGLine;
 
+typedef enum SVGElementType {
+	SVGMoveTo, SVGLineTo, SVGCubicBezier, SVGQuadBezier, SVGArc
+} SVGElementType;
 
+typedef enum SVGLargeArcFlag {
+	largeArcOn,
+	largeArcOff,
+	largeArcBoth
+} SVGLargeArcFlag;
 
-#endif
+typedef enum SVGSweepFlag {
+	sweepOn,
+	sweepOff,
+	sweepBoth
+} SVGSweepFlag;
+
+@interface SVGPathElement : NSObject {
+	SVGElementType elementType;
+	CGPoint toPoint;
+	CGPoint controlPoint1;
+	CGPoint controlPoint2;
+	CGFloat radiusX;
+	CGFloat radiusY;
+	CGFloat xAxisRotation;
+	SVGLargeArcFlag largeArcFlag;
+	SVGSweepFlag sweepFlag;	
+}
+
+@property (nonatomic) SVGElementType elementType;
+@property (nonatomic) CGPoint toPoint;
+@property (nonatomic) CGPoint controlPoint1;
+@property (nonatomic) CGPoint controlPoint2;
+@property (nonatomic) CGFloat xAxisRotation;
+@property (nonatomic) CGFloat radiusX;
+@property (nonatomic) CGFloat radiusY;
+@property (nonatomic) SVGLargeArcFlag largeArcFlag;
+@property (nonatomic) SVGSweepFlag sweepFlag;
+
+@end
+
