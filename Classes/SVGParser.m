@@ -42,6 +42,9 @@ typedef enum SVGBezierType {
 								toPath:(NSMutableArray *) path 
 						  usingScanner:(NSScanner *) scanner;
 - (SVGStyle *) handleStyleUsingAttributes:(NSDictionary *) attributes;
+- (SVGTransform) handleTransformUsingAttributes:(NSDictionary *) attributes;
+- (void) handlePolylinesUsingAttributes:(NSDictionary *) attributes isPolygon:(BOOL) isPolygon;
+- (UIColor *) parseColorFromString:(NSString *) colorValue;
 @end
 
 @implementation SVGParser
@@ -130,6 +133,7 @@ static NSString *arcDirCharacters = @"01?";
 
 - (void) handlePathUsingAttributes:(NSDictionary *) attributes {
 	SVGStyle *style = [self handleStyleUsingAttributes:attributes];
+	SVGTransform transform = [self handleTransformUsingAttributes:attributes];
 	NSString *dataString = [attributes objectForKey:d];
 	NSUInteger stringLen = [dataString length] + 1;
 	
@@ -150,6 +154,7 @@ static NSString *arcDirCharacters = @"01?";
 		previousCubicControlPoint_ = CGPointZero;
 		previousQuadraticControlPoint_ = CGPointZero;
 		curPoint_ = CGPointZero;
+		initialPoint_ = CGPointZero;
 		isTherePreviousCubicControlPoint_ = NO;
 		isTherePreviousQuadraticControlPoint_ = NO;
 		for (NSInteger i = 0; i < numOfPathElements - 1; i++) {
@@ -164,6 +169,14 @@ static NSString *arcDirCharacters = @"01?";
 			
 			switch (pathChar) {
 				case 'z':
+					;
+					SVGPathElement *pathElement = [[SVGPathElement alloc] init];
+					pathElement.initialPoint = initialPoint_;
+					pathElement.toPoint = curPoint_;
+					pathElement.elementType = SVGClosePath;
+					
+					[path addObject:pathElement];
+					[pathElement release];
 					break;
 				case 'm':
 					if (i != 0) {
@@ -241,7 +254,7 @@ static NSString *arcDirCharacters = @"01?";
 			stringIndex += [pathElementString length] + 1; // +1 for the command
 			
 		}
-		[delegate_ parser:self didFoundPath:path usingStyle:style];
+		[delegate_ parser:self didFoundPath:path usingStyle:style usingTransform:transform];
 //		[delegate_ performSelector:@selector(parser:didFoundPath:) withObject:self withObject:path];
 		[path release];
 		free(dataStringBuffer);
@@ -250,7 +263,6 @@ static NSString *arcDirCharacters = @"01?";
 }
 
 - (void) addMoveToUsingRelative:(BOOL) isRelative toPath:(NSMutableArray *)path usingScanner:(NSScanner *) scanner{
-	
 	CGPoint toPoint;
 	NSUInteger iteration = 0;
 	while ([scanner isAtEnd] == NO) {
@@ -267,6 +279,7 @@ static NSString *arcDirCharacters = @"01?";
 				pathElement.elementType = SVGLineTo;
 			} else {
 				pathElement.elementType = SVGMoveTo;
+				initialPoint_ = toPoint;
 			}
 			pathElement.toPoint = toPoint;
 			[path addObject:pathElement];
@@ -464,6 +477,12 @@ static NSString *arcDirCharacters = @"01?";
 			pathElement.largeArcFlag = largeArcFlag;
 			pathElement.sweepFlag = sweepFlag;
 			
+//			SVGPathElement pathElement;
+//			NSValue *pathElementValue = [NSValue value:&pathElement withObjCType:@encode(pathElement)];
+//			
+//			SVGPathElement pathElement2;
+//			[pathElementValue getValue:&pathElement2];
+			
 			[path addObject:pathElement];
 			[pathElement release];
 			
@@ -473,28 +492,111 @@ static NSString *arcDirCharacters = @"01?";
 	
 }
 
+- (void) handleRectUsingAttributes:(NSDictionary *) attributes {
+	SVGStyle *style = [self handleStyleUsingAttributes:attributes];
+	SVGTransform transform = [self handleTransformUsingAttributes:attributes];
+    	
+	CGFloat xCoord = [[attributes objectForKey:@"x"] floatValue];
+	CGFloat yCoord = [[attributes objectForKey:@"y"] floatValue];
+	CGFloat width = [[attributes objectForKey:@"width"] floatValue];
+	CGFloat height = [[attributes objectForKey:@"height"] floatValue];
+
+	SVGRect svgRect;
+	svgRect.rect = CGRectMake(xCoord, yCoord, width, height);;
+
+	NSString *radiusString = [attributes objectForKey:@"rx"];
+	if (nil == radiusString) {
+		svgRect.radiusX = 0.0f;
+	} else {
+		svgRect.radiusX = [radiusString floatValue];
+	}
+	radiusString = [attributes objectForKey:@"ry"];
+	if (nil == radiusString) {
+		svgRect.radiusY	= 0.0f;
+	} else {
+		svgRect.radiusY = [radiusString floatValue];
+	}
+
+	[delegate_ parser:self didFoundRect:svgRect usingStyle:style usingTransform:transform];
+}
+
 - (void) handleCircleUsingAttributes:(NSDictionary *) attributes {
-    
+	SVGStyle *style = [self handleStyleUsingAttributes:attributes];
+	SVGTransform transform = [self handleTransformUsingAttributes:attributes];
+   
+	CGFloat centerX = [[attributes objectForKey:@"cx"] floatValue];
+	CGFloat centerY = [[attributes objectForKey:@"cy"] floatValue];
+
+	SVGCircle svgCircle;
+	svgCircle.center = CGPointMake(centerX, centerY);
+	svgCircle.radius = [[attributes objectForKey:@"r"] floatValue];
+	
+	[delegate_ parser:self didFoundCircle:svgCircle usingStyle:style usingTransform:transform];
 }
 
 - (void) handleEllipseUsingAttributes:(NSDictionary *) attributes {
-    
+	SVGStyle *style = [self handleStyleUsingAttributes:attributes];
+	SVGTransform transform = [self handleTransformUsingAttributes:attributes];
+
+	CGFloat centerX = [[attributes objectForKey:@"cx"] floatValue];
+	CGFloat centerY = [[attributes objectForKey:@"cy"] floatValue];
+
+	SVGEllipse svgEllipse;
+	svgEllipse.center = CGPointMake(centerX, centerY);
+	svgEllipse.radiusX = [[attributes objectForKey:@"rx"] floatValue];
+	svgEllipse.radiusX = [[attributes objectForKey:@"ry"] floatValue];
+
+	[delegate_ parser:self didFoundEllipse:svgEllipse usingStyle:style usingTransform:transform];		
 }
 
 - (void) handleLineUsingAttributes:(NSDictionary *) attributes {
-    
+	SVGStyle *style = [self handleStyleUsingAttributes:attributes];
+	SVGTransform transform = [self handleTransformUsingAttributes:attributes];
+
+	CGFloat startX = [[attributes objectForKey:@"x1"] floatValue];
+	CGFloat startY = [[attributes objectForKey:@"y1"] floatValue];
+	CGFloat endX = [[attributes objectForKey:@"x2"] floatValue];
+	CGFloat endY = [[attributes objectForKey:@"y2"] floatValue];
+	
+	SVGLine svgLine;
+	svgLine.start = CGPointMake(startX, startY);
+	svgLine.end = CGPointMake(endX, endY);
+	
+	[delegate_ parser:self didFoundLine:svgLine usingStyle:style usingTransform:transform];		
 }
 
 - (void) handlePolylineUsingAttributes:(NSDictionary *) attributes {
-    
-}
-
-- (void) handleRectUsingAttributes:(NSDictionary *) attributes {
-    
+	[self handlePolylinesUsingAttributes:attributes isPolygon:NO];
 }
 
 - (void) handlePolygonUsingAttributes:(NSDictionary *) attributes {
-    
+	[self handlePolylinesUsingAttributes:attributes isPolygon:YES];
+}
+
+- (void) handlePolylinesUsingAttributes:(NSDictionary *) attributes isPolygon:(BOOL) isPolygon {
+	SVGStyle *style = [self handleStyleUsingAttributes:attributes];
+	SVGTransform transform = [self handleTransformUsingAttributes:attributes];
+	NSMutableArray *polyline = [NSMutableArray array];
+	
+	NSString *pointsString = [attributes objectForKey:@"points"];
+	NSScanner *scanner = [NSScanner scannerWithString:pointsString];
+	NSMutableCharacterSet *charsToBeSkipped = [NSMutableCharacterSet whitespaceAndNewlineCharacterSet]; 
+	[charsToBeSkipped addCharactersInString:@","];
+	[scanner setCharactersToBeSkipped:charsToBeSkipped];
+	
+	CGPoint point = CGPointZero;
+	while ([scanner isAtEnd] == NO) {
+		if ([scanner scanFloat:&point.x] && [scanner scanFloat:&point.y])  {
+			NSValue *pointValue = [NSValue valueWithCGPoint:point];
+			[polyline addObject:pointValue];
+		}
+	}
+	
+	if (isPolygon) {
+		[delegate_ parser:self didFoundPolygon:polyline usingStyle:style usingTransform:transform];			
+	} else {
+		[delegate_ parser:self didFoundPolyline:polyline usingStyle:style usingTransform:transform];					
+	}
 }
 
 - (void) handleImageUsingAttributes:(NSDictionary *) attributes {
@@ -533,17 +635,9 @@ static NSString *arcDirCharacters = @"01?";
 		
 		if (![styleValue isEqualToString:notFound]) { 
 			if ([styleName isEqualToString:@"fill"]) {
-				UIColor *color = [UIColor colorWithName:styleValue];
-				if (color == nil) {
-					color = [UIColor colorWithHexString:styleValue];
-				}
-				style.fillColor = color;
+				style.fillColor = [self parseColorFromString:styleValue];
 			} else if ([styleName isEqualToString:@"stroke"]) {
-				UIColor *color = [UIColor colorWithName:styleValue];
-				if (color == nil) {
-					color = [UIColor colorWithHexString:styleValue];
-				}
-				style.strokeColor = color;
+				style.strokeColor = [self parseColorFromString:styleValue];
 			} else if ([styleName isEqualToString:@"stroke-width"]) {
 				style.strokeWidth = [styleValue floatValue];
 			} else if ([styleName isEqualToString:@"stroke-linecap"]) {
@@ -555,8 +649,8 @@ static NSString *arcDirCharacters = @"01?";
 					style.strokeLineCap	= LineCapSquare;
 				}
 			} else if ([styleName isEqualToString:@"stroke-linejoin"]) {
-				if ([styleValue isEqualToString:@"meter"]) {
-					style.strokeLineJoin = LineJoinMeter;
+				if ([styleValue isEqualToString:@"miter"]) {
+					style.strokeLineJoin = LineJoinMiter;
 				} else if ([styleValue isEqualToString:@"round"]) {
 					style.strokeLineJoin = LineJoinRound;
 				} else if ([styleValue isEqualToString:@"bevel"]) {
@@ -571,5 +665,83 @@ static NSString *arcDirCharacters = @"01?";
 	return style;
 }
 
+- (UIColor *) parseColorFromString:(NSString *) colorValue {
+	UIColor *color;
+	NSScanner *scanner = [NSScanner scannerWithString:colorValue];
+	if ([scanner scanString:@"none" intoString:NULL]) {
+		color = [UIColor clearColor];
+	} else {
+		color = [UIColor colorWithName:colorValue];
+		if (color == nil) {
+			color = [UIColor colorWithHexString:colorValue];
+		}
+	}
+	return color;
+}
+
+#define NUM_MATRIX_ELEMS 6
+
+- (SVGTransform) handleTransformUsingAttributes:(NSDictionary *) attributes {
+	SVGTransform transform;
+	transform.transformType = none;
+	BOOL parsingError = NO;
+
+	NSString *transformString = [attributes objectForKey:@"transform"];
+	if (nil != transformString) {
+		NSScanner *scanner = [NSScanner scannerWithString:transformString];
+		NSMutableCharacterSet *charsToBeSkipped = [NSMutableCharacterSet whitespaceAndNewlineCharacterSet]; 
+		[charsToBeSkipped addCharactersInString:@",()"];
+		[scanner setCharactersToBeSkipped:charsToBeSkipped];
+		if ([scanner scanString:@"matrix" intoString:NULL]) {
+			for (NSInteger i = 0; i < NUM_MATRIX_ELEMS; i++) {
+				transform.transformType = matrix;
+				if (![scanner scanFloat:&transform.matrixValues_[i]]) {
+					parsingError = YES;
+				}
+			}
+		} else if ([scanner scanString:@"translate" intoString:NULL]){
+			if (![scanner scanFloat:&transform.translateX]) {
+				parsingError = YES;
+			}
+			if (![scanner scanFloat:&transform.translateY]) {
+				transform.translateY = 0.0f;
+			}			
+			transform.transformType = translate;
+		} else if ([scanner scanString:@"scale" intoString:NULL]){
+			if (![scanner scanFloat:&transform.scaleX]) {
+				parsingError = YES;
+			}
+			if (![scanner scanFloat:&transform.scaleY]) {
+				transform.scaleY = transform.scaleX;
+			}			
+			transform.transformType = scale;
+		} else if ([scanner scanString:@"rotate" intoString:NULL]) {
+			if (![scanner scanFloat:&transform.rotateAngle]) {
+				parsingError = YES;
+			}
+			transform.rotateAroundOrigin = NO;
+			if (!([scanner scanFloat:&transform.rotateCenter.x] && [scanner scanFloat:&transform.rotateCenter.y])) {
+				transform.rotateAroundOrigin = YES;
+			}			
+			transform.transformType = rotate;
+		} else if ([scanner scanString:@"skewX" intoString:NULL]) {
+			if (![scanner scanFloat:&transform.skewAngle]) {
+				parsingError = YES;
+			}
+			transform.transformType = skewX;
+		} else if ([scanner scanString:@"skewY" intoString:NULL]) {
+			if (![scanner scanFloat:&transform.skewAngle]) {
+				parsingError = YES;
+			}
+			transform.transformType = skewY;
+		} 
+
+
+	}
+	if (parsingError) {
+		transform.transformType = none;
+	}
+	return transform;
+}
 
 @end

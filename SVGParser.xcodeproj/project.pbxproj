@@ -32,6 +32,11 @@
 		BD0D2DDB125D2EEE00127DAD /* UIColor-Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0D2DD8125D2EEE00127DAD /* UIColor-Expanded.m */; };
 		BD0D2DDC125D2EEE00127DAD /* UIColor-Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0D2DD8125D2EEE00127DAD /* UIColor-Expanded.m */; };
 		BD0D2DDE125D2FC800127DAD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD0D2DDD125D2FC800127DAD /* UIKit.framework */; };
+		BD0D2E31125DCCA400127DAD /* SVGTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = BD0D2E2E125DCCA400127DAD /* SVGTransform.h */; };
+		BD0D2ECF125FCE5F00127DAD /* SVGRendererTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0D2ECE125FCE5F00127DAD /* SVGRendererTest.m */; };
+		BD0D2ED0125FCE5F00127DAD /* SVGRendererTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0D2ECE125FCE5F00127DAD /* SVGRendererTest.m */; };
+		BD0D2ED3125FD32400127DAD /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0D2ED2125FD32400127DAD /* Utils.m */; };
+		BD0D2ED4125FD32400127DAD /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0D2ED2125FD32400127DAD /* Utils.m */; };
 		BD3F102F12501A0400ED816C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3F102E12501A0400ED816C /* Foundation.framework */; };
 		BD8435D9125062EA00C0472D /* SVGParserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8435D8125062EA00C0472D /* SVGParserTest.m */; };
 		BD8435DE12506C7000C0472D /* SVGGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8435DD12506C7000C0472D /* SVGGroup.m */; };
@@ -68,6 +73,11 @@
 		BD0D2DD7125D2EEE00127DAD /* UIColor-Expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor-Expanded.h"; sourceTree = "<group>"; };
 		BD0D2DD8125D2EEE00127DAD /* UIColor-Expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor-Expanded.m"; sourceTree = "<group>"; };
 		BD0D2DDD125D2FC800127DAD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		BD0D2E2E125DCCA400127DAD /* SVGTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGTransform.h; sourceTree = "<group>"; };
+		BD0D2ECD125FCE5F00127DAD /* SVGRendererTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGRendererTest.h; sourceTree = "<group>"; };
+		BD0D2ECE125FCE5F00127DAD /* SVGRendererTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVGRendererTest.m; sourceTree = "<group>"; };
+		BD0D2ED1125FD32400127DAD /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		BD0D2ED2125FD32400127DAD /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		BD3F102C12501A0400ED816C /* libSVGParser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSVGParser.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD3F102E12501A0400ED816C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BD3F103012501A0400ED816C /* SVGParser_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SVGParser_Prefix.pch; sourceTree = "<group>"; };
@@ -144,8 +154,8 @@
 			isa = PBXGroup;
 			children = (
 				BD0D2DD6125D2EB600127DAD /* UIColorUtils */,
-				BD84365A1251AE3D00C0472D /* SVGParser.m */,
 				BD84365B1251AE3D00C0472D /* SVGParser.h */,
+				BD84365A1251AE3D00C0472D /* SVGParser.m */,
 				BD8435DC12506C7000C0472D /* SVGGroup.h */,
 				BD8435DD12506C7000C0472D /* SVGGroup.m */,
 				BD8435E112519BE000C0472D /* SVGShapes1.h */,
@@ -155,6 +165,7 @@
 				BD0D2D49125BCDE800127DAD /* SVGShapes.m */,
 				BD0D2D90125C5D9300127DAD /* SVGStyle.h */,
 				BD0D2D91125C5D9300127DAD /* SVGStyle.m */,
+				BD0D2E2E125DCCA400127DAD /* SVGTransform.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -192,6 +203,10 @@
 			children = (
 				BD8435D7125062EA00C0472D /* SVGParserTest.h */,
 				BD8435D8125062EA00C0472D /* SVGParserTest.m */,
+				BD0D2ECD125FCE5F00127DAD /* SVGRendererTest.h */,
+				BD0D2ECE125FCE5F00127DAD /* SVGRendererTest.m */,
+				BD0D2ED1125FD32400127DAD /* Utils.h */,
+				BD0D2ED2125FD32400127DAD /* Utils.m */,
 			);
 			path = UnitTestClasses;
 			sourceTree = "<group>";
@@ -210,6 +225,7 @@
 				BD0D2D4B125BCDE800127DAD /* SVGShapes.h in Headers */,
 				BD0D2D93125C5D9300127DAD /* SVGStyle.h in Headers */,
 				BD0D2DDA125D2EEE00127DAD /* UIColor-Expanded.h in Headers */,
+				BD0D2E31125DCCA400127DAD /* SVGTransform.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +357,8 @@
 				BD0D2D4D125BCDE800127DAD /* SVGShapes.m in Sources */,
 				BD0D2D95125C5D9300127DAD /* SVGStyle.m in Sources */,
 				BD0D2DDC125D2EEE00127DAD /* UIColor-Expanded.m in Sources */,
+				BD0D2ED0125FCE5F00127DAD /* SVGRendererTest.m in Sources */,
+				BD0D2ED4125FD32400127DAD /* Utils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +386,8 @@
 				BD0D2D4A125BCDE800127DAD /* SVGShapes.m in Sources */,
 				BD0D2D92125C5D9300127DAD /* SVGStyle.m in Sources */,
 				BD0D2DD9125D2EEE00127DAD /* UIColor-Expanded.m in Sources */,
+				BD0D2ECF125FCE5F00127DAD /* SVGRendererTest.m in Sources */,
+				BD0D2ED3125FD32400127DAD /* Utils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

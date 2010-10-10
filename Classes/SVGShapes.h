@@ -33,7 +33,7 @@ typedef struct SVGLine {
 } SVGLine;
 
 typedef enum SVGElementType {
-	SVGMoveTo, SVGLineTo, SVGCubicBezier, SVGQuadBezier, SVGArc
+	SVGMoveTo, SVGLineTo, SVGCubicBezier, SVGQuadBezier, SVGArc, SVGClosePath
 } SVGElementType;
 
 typedef enum SVGLargeArcFlag {
@@ -50,6 +50,7 @@ typedef enum SVGSweepFlag {
 
 @interface SVGPathElement : NSObject {
 	SVGElementType elementType;
+	CGPoint initialPoint;
 	CGPoint toPoint;
 	CGPoint controlPoint1;
 	CGPoint controlPoint2;
@@ -61,6 +62,7 @@ typedef enum SVGSweepFlag {
 }
 
 @property (nonatomic) SVGElementType elementType;
+@property (nonatomic) CGPoint initialPoint;
 @property (nonatomic) CGPoint toPoint;
 @property (nonatomic) CGPoint controlPoint1;
 @property (nonatomic) CGPoint controlPoint2;

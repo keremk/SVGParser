@@ -10,6 +10,7 @@
 
 
 @implementation SVGPathElement 
-@synthesize elementType, toPoint, controlPoint1, controlPoint2, radiusX, radiusY, xAxisRotation, largeArcFlag, sweepFlag;	
+@synthesize elementType, initialPoint, toPoint, controlPoint1, controlPoint2, 
+			radiusX, radiusY, xAxisRotation, largeArcFlag, sweepFlag;	
 
 @end

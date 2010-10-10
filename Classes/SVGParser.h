@@ -11,6 +11,8 @@
 #import "SVGStyle.h"
 #import "SVGShapes.h"
 
+#include "SVGTransform.h"
+
 @protocol SVGParserDelegate;
 
 @interface SVGParser : NSObject<NSXMLParserDelegate> {
@@ -22,6 +24,7 @@
 	id<SVGParserDelegate> delegate_;
 	
 	CGPoint curPoint_;
+	CGPoint initialPoint_;
 	BOOL isTherePreviousCubicControlPoint_, isTherePreviousQuadraticControlPoint_;
 	CGPoint previousCubicControlPoint_, previousQuadraticControlPoint_;
 }
@@ -36,6 +39,25 @@
 
 @protocol SVGParserDelegate<NSObject>
 @required
-- (void) parser:(SVGParser *) parser didFoundPath:(NSArray *) path usingStyle:(SVGStyle *) style;
-- (void) parser:(SVGParser *) parser didFoundRect:(SVGRect) rect;
+- (void) parser:(SVGParser *) parser didFoundPath:(NSArray *) path 
+	 usingStyle:(SVGStyle *) style 
+ usingTransform:(SVGTransform) transform;
+- (void) parser:(SVGParser *) parser didFoundRect:(SVGRect) rect 
+	 usingStyle:(SVGStyle *) style 
+ usingTransform:(SVGTransform) transform;
+- (void) parser:(SVGParser *) parser didFoundCircle:(SVGCircle) circle 
+	 usingStyle:(SVGStyle *) style 
+ usingTransform:(SVGTransform) transform;
+- (void) parser:(SVGParser *) parser didFoundEllipse:(SVGEllipse) ellipse 
+	 usingStyle:(SVGStyle *) style 
+ usingTransform:(SVGTransform) transform;
+- (void) parser:(SVGParser *) parser didFoundLine:(SVGLine) line 
+	 usingStyle:(SVGStyle *) style 
+ usingTransform:(SVGTransform) transform;
+- (void) parser:(SVGParser *) parser didFoundPolyline:(NSArray *) polyline 
+	 usingStyle:(SVGStyle *) style 
+ usingTransform:(SVGTransform) transform;
+- (void) parser:(SVGParser *) parser didFoundPolygon:(NSArray *) polygon 
+	 usingStyle:(SVGStyle *) style 
+ usingTransform:(SVGTransform) transform;
 @end

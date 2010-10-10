@@ -1,8 +1,8 @@
 //
-//  SVGParserTest.h
+//  SVGRendererTest.h
 //  SVGParser
 //
-//  Created by Kerem Karatal on 9/26/10.
+//  Created by Kerem Karatal on 10-10-08.
 //  Copyright 2010 Coding Ventures. All rights reserved.
 //
 //  See Also: http://developer.apple.com/iphone/library/documentation/Xcode/Conceptual/iphone_development/135-Unit_Testing_Applications/unit_testing_applications.html
@@ -17,16 +17,14 @@
 //#import "application_headers" as required
 
 
-@interface SVGParserTest : SenTestCase {
+@interface SVGRendererTest : SenTestCase {
 
 }
 
 #if USE_APPLICATION_UNIT_TEST
 - (void) testAppDelegate;       // simple test on application
 #else
-- (void) testLoadSVG;
-- (void) testMath;              // simple standalone test
+- (void) testRenderPathWithLines;
 #endif
 
 @end
-
