@@ -111,6 +111,7 @@
 - (CGPathRef) newLinePathUsingSVGLine:(SVGLine) svgLine usingTransform:(SVGTransform) transform {
 	CGMutablePathRef cgPath = CGPathCreateMutable();
 	CGAffineTransform cgTransform = [self transformUsingSVGTransform:transform];
+	CGPathMoveToPoint(cgPath, &cgTransform, svgLine.start.x, svgLine.start.y);
 	CGPathAddLineToPoint(cgPath, &cgTransform, svgLine.end.x, svgLine.end.y);	
 	return cgPath;
 }

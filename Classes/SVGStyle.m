@@ -25,11 +25,11 @@
 		// Set defaults as per SVG Spec
 		self.opacity = 1.0;
 		
-		self.fillColor = [UIColor clearColor];
+		self.fillColor = [UIColor blackColor];
 		self.fillRule = FillRuleNonZero;
 		self.fillOpacity = 1.0f;
 
-		self.strokeColor = [UIColor blackColor];
+		self.strokeColor = [UIColor clearColor];
 		self.strokeWidth = 1.0f;
 		self.strokeLineCap = LineCapButt;
 		self.strokeLineJoin = LineJoinMiter;

@@ -54,7 +54,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = BD3F102012501A0400ED816C /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = BD3F102B12501A0400ED816C /* SVGParser */;
+			remoteGlobalIDString = BD3F102B12501A0400ED816C;
 			remoteInfo = SVGParser;
 		};
 /* End PBXContainerItemProxy section */

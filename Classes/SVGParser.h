@@ -15,6 +15,18 @@
 
 @protocol SVGParserDelegate;
 
+@interface SVGCommand : NSObject {
+	unichar command;
+	unichar *coords;
+	size_t coordsLength;
+}
+
+@property (nonatomic) unichar command;
+@property (nonatomic) unichar *coords;
+@property (nonatomic) size_t coordsLength;
+@end
+
+
 @interface SVGParser : NSObject<NSXMLParserDelegate> {
 @private    
     NSXMLParser *xmlParser_;

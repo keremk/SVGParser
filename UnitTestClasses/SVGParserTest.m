@@ -24,14 +24,14 @@
 
 static NSString *basePath = @"/Users/kkaratal/Developer/SVGParser/SVGFiles";
 
-- (void) testLoadSVG {
-	NSString *testSVGFilename = @"Bear01.svg";
-	NSURL *svgUrl = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", basePath, testSVGFilename]];
-	SVGParser *svgParser = [[SVGParser alloc] initWithContentsOfUrl:svgUrl];
-	[svgParser parse];
-	
-	[svgParser release];
-}
+//- (void) testLoadSVG {
+//	NSString *testSVGFilename = @"Bear01.svg";
+//	NSURL *svgUrl = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", basePath, testSVGFilename]];
+//	SVGParser *svgParser = [[SVGParser alloc] initWithContentsOfUrl:svgUrl];
+//	[svgParser parse];
+//	
+//	[svgParser release];
+//}
 
 - (void) testMath {
     

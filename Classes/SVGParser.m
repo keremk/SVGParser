@@ -10,6 +10,17 @@
 #import	<CoreGraphics/CoreGraphics.h>
 #import "UIColor-Expanded.h"
 
+@implementation SVGCommand
+@synthesize command, coords, coordsLength;
+- (void) dealloc
+{
+	free(coords);
+	[super dealloc];
+}
+
+@end
+
+
 typedef enum SVGLineType {
 	line,
 	horizontal,
@@ -130,135 +141,190 @@ static NSString *d = @"d";
 static NSString *pathCharacters = @"MmLlHhVvCcSsQqTtAaz";
 static NSString *arcDirCharacters = @"01?";
 
+- (NSArray *) parseCommands:(NSString *) dataString {
+	NSMutableArray *commands = [NSMutableArray array];
+	NSCharacterSet *charSet = [NSCharacterSet characterSetWithCharactersInString:pathCharacters];
+	NSUInteger stringLen = [dataString length] + 1;
+	
+	char *dataStringBuffer = (char *) malloc(sizeof(char) * stringLen);
+	BOOL bufOk = [dataString getCString:dataStringBuffer maxLength:stringLen encoding:NSUTF8StringEncoding];
+	if (bufOk) {
+
+		SVGCommand *command = nil;
+		size_t coordsLength = 0;
+		for (NSInteger i = 0; i < stringLen; i++) {
+			unichar pathChar = dataStringBuffer[i];
+
+			if ([charSet characterIsMember:pathChar]) {
+				if (nil != command) {
+					if (0 != coordsLength) {
+						unichar *tmp = realloc(command.coords, sizeof(unichar) * (coordsLength + 1));
+						if (NULL != tmp) {
+							command.coords = tmp;
+							command.coords[coordsLength] = '\0';
+							command.coordsLength = coordsLength + 1; // including '\0'
+						}						
+					} else {
+						free(command.coords);
+						command.coords = NULL;
+						command.coordsLength = 0;
+					}
+
+					[commands addObject:command];
+					[command release];
+					coordsLength = 0;
+				}
+				command = [[SVGCommand alloc] init];				
+				command.command = pathChar;
+				command.coords = (unichar *) malloc(sizeof(unichar) * (stringLen + 1));
+			} else {
+				if (nil != command) {
+					command.coords[coordsLength] = pathChar;
+					coordsLength++;
+				}
+			}
+		}
+		if (nil != command) {
+			if (0 != coordsLength) {
+				unichar *tmp = realloc(command.coords, sizeof(unichar) * (coordsLength + 1));
+				if (NULL != tmp) {
+					command.coords = tmp;
+					command.coords[coordsLength] = '\0';
+					command.coordsLength = coordsLength + 1; // including '\0'
+				}						
+			} else {
+				free(command.coords);
+				command.coords = NULL;
+				command.coordsLength = 0;
+			}
+			
+			[commands addObject:command];
+			[command release];
+		}
+	}
+	return commands;
+}
 
 - (void) handlePathUsingAttributes:(NSDictionary *) attributes {
 	SVGStyle *style = [self handleStyleUsingAttributes:attributes];
 	SVGTransform transform = [self handleTransformUsingAttributes:attributes];
 	NSString *dataString = [attributes objectForKey:d];
-	NSUInteger stringLen = [dataString length] + 1;
-	
-	char *dataStringBuffer = (char *) malloc(sizeof(char) * stringLen);
-	BOOL bufOk = [dataString getCString:dataStringBuffer maxLength:stringLen encoding:NSUTF8StringEncoding];
-	if (bufOk) {		
-		NSCharacterSet *charSet = [NSCharacterSet characterSetWithCharactersInString:pathCharacters];
-		NSArray *pathElementStrings = [dataString componentsSeparatedByCharactersInSet:charSet];
+	NSArray *commandArray = [self parseCommands:dataString];
 		
-		NSMutableCharacterSet *charsToBeSkipped = [NSMutableCharacterSet whitespaceAndNewlineCharacterSet]; 
-		[charsToBeSkipped addCharactersInString:@","];
+	NSMutableCharacterSet *charsToBeSkipped = [NSMutableCharacterSet whitespaceAndNewlineCharacterSet]; 
+	[charsToBeSkipped addCharactersInString:@",\0"];
 
-		NSInteger numOfPathElements = [pathElementStrings count];
-		NSInteger stringIndex = 0;
+	NSInteger numOfPathElements = [commandArray count];
+	
+	NSMutableArray *path = [[NSMutableArray alloc] init];
+	
+	previousCubicControlPoint_ = CGPointZero;
+	previousQuadraticControlPoint_ = CGPointZero;
+	curPoint_ = CGPointZero;
+	initialPoint_ = CGPointZero;
+	isTherePreviousCubicControlPoint_ = NO;
+	isTherePreviousQuadraticControlPoint_ = NO;
+	for (NSInteger i = 0; i < numOfPathElements; i++) {
+		SVGCommand *command = [commandArray objectAtIndex:i];
+		unichar pathChar = command.command;
+		NSString *pathElementString = [NSString stringWithCharacters:command.coords length:command.coordsLength - 1];
 		
-		NSMutableArray *path = [[NSMutableArray alloc] init];
+		size_t dummyLen = [pathElementString length];
+		NSLog(@"%d", dummyLen);
+		BOOL isRelative = NO;
+		NSScanner *scanner = [NSScanner scannerWithString:pathElementString];
+		[scanner setCharactersToBeSkipped:charsToBeSkipped];
+		SVGLineType lineType;
+		BOOL isShared;
 		
-		previousCubicControlPoint_ = CGPointZero;
-		previousQuadraticControlPoint_ = CGPointZero;
-		curPoint_ = CGPointZero;
-		initialPoint_ = CGPointZero;
-		isTherePreviousCubicControlPoint_ = NO;
-		isTherePreviousQuadraticControlPoint_ = NO;
-		for (NSInteger i = 0; i < numOfPathElements - 1; i++) {
-			char pathChar = dataStringBuffer[stringIndex];
-			NSString *pathElementString = [pathElementStrings objectAtIndex:(i + 1)];
-			
-			BOOL isRelative = NO;
-			NSScanner *scanner = [NSScanner scannerWithString:pathElementString];
-			[scanner setCharactersToBeSkipped:charsToBeSkipped];
-			SVGLineType lineType;
-			BOOL isShared;
-			
-			switch (pathChar) {
-				case 'z':
-					;
-					SVGPathElement *pathElement = [[SVGPathElement alloc] init];
-					pathElement.initialPoint = initialPoint_;
-					pathElement.toPoint = curPoint_;
-					pathElement.elementType = SVGClosePath;
-					
-					[path addObject:pathElement];
-					[pathElement release];
-					break;
-				case 'm':
-					if (i != 0) {
-						// As per SVG spec, if relative moveto is encountered as first element of a path
-						// it is treated as an absolute moveto
-						isRelative = YES;
-					}
-				case 'M':
-					[self addMoveToUsingRelative:isRelative toPath:path usingScanner:scanner];
-					break;
-				case 'l':
-				case 'h':
-				case 'v':
+		switch (pathChar) {
+			case 'z':
+				;
+				SVGPathElement *pathElement = [[SVGPathElement alloc] init];
+				pathElement.initialPoint = initialPoint_;
+				pathElement.toPoint = curPoint_;
+				pathElement.elementType = SVGClosePath;
+				
+				[path addObject:pathElement];
+				[pathElement release];
+				break;
+			case 'm':
+				if (i != 0) {
+					// As per SVG spec, if relative moveto is encountered as first element of a path
+					// it is treated as an absolute moveto
 					isRelative = YES;
-				case 'L':
-				case 'H':
-				case 'V': 
-					if (pathChar == 'l' || pathChar == 'L') {
-						lineType = line;
-					} else if (pathChar == 'h' || pathChar == 'H') {
-						lineType = horizontal;
-					} else if (pathChar == 'v' || pathChar == 'V') {
-						lineType = vertical;
-					}
-					
-					[self addLineToOfType:lineType 
-							usingRelative:isRelative 
-								   toPath:path
-							 usingScanner:scanner];
-					
-					break;
-				case 'c':
-				case 's':
-					isRelative = YES;
-				case 'C':
-				case 'S':
-					isShared = NO;
-					if (pathChar == 's' || pathChar == 'S') {
-						isShared = YES;
-					}
-					
-					[self addBezierCurveWithSharedControlPoint:isShared 
-												 forBezierType:cubic
-												 usingRelative:isRelative 
-														toPath:path 
-												  usingScanner:scanner];
-					break;
-				case 'q':
-				case 't':
-					isRelative = YES;
-				case 'Q':
-				case 'T':
-					isShared = NO;
-					if (pathChar == 't' || pathChar == 'T') {
-						isShared = YES;
-					}
-					
-					[self addBezierCurveWithSharedControlPoint:isShared 
-												 forBezierType:quad 
-												 usingRelative:isRelative 
-														toPath:path 
-												  usingScanner:scanner];
-					
-				case 'a':
-					isRelative = YES;
-				case 'A':	
-					
-					[self addEllipticalArcUsingRelative:isRelative 
-												 toPath:path 
-										   usingScanner:scanner];
-					break;
-				default:
-					break;
-			}
-			stringIndex += [pathElementString length] + 1; // +1 for the command
-			
+				}
+			case 'M':
+				[self addMoveToUsingRelative:isRelative toPath:path usingScanner:scanner];
+				break;
+			case 'l':
+			case 'h':
+			case 'v':
+				isRelative = YES;
+			case 'L':
+			case 'H':
+			case 'V': 
+				if (pathChar == 'l' || pathChar == 'L') {
+					lineType = line;
+				} else if (pathChar == 'h' || pathChar == 'H') {
+					lineType = horizontal;
+				} else if (pathChar == 'v' || pathChar == 'V') {
+					lineType = vertical;
+				}
+				
+				[self addLineToOfType:lineType 
+						usingRelative:isRelative 
+							   toPath:path
+						 usingScanner:scanner];
+				
+				break;
+			case 'c':
+			case 's':
+				isRelative = YES;
+			case 'C':
+			case 'S':
+				isShared = NO;
+				if (pathChar == 's' || pathChar == 'S') {
+					isShared = YES;
+				}
+				
+				[self addBezierCurveWithSharedControlPoint:isShared 
+											 forBezierType:cubic
+											 usingRelative:isRelative 
+													toPath:path 
+											  usingScanner:scanner];
+				break;
+			case 'q':
+			case 't':
+				isRelative = YES;
+			case 'Q':
+			case 'T':
+				isShared = NO;
+				if (pathChar == 't' || pathChar == 'T') {
+					isShared = YES;
+				}
+				
+				[self addBezierCurveWithSharedControlPoint:isShared 
+											 forBezierType:quad 
+											 usingRelative:isRelative 
+													toPath:path 
+											  usingScanner:scanner];
+				
+			case 'a':
+				isRelative = YES;
+			case 'A':	
+				
+				[self addEllipticalArcUsingRelative:isRelative 
+											 toPath:path 
+									   usingScanner:scanner];
+				break;
+			default:
+				break;
 		}
-		[delegate_ parser:self didFoundPath:path usingStyle:style usingTransform:transform];
-//		[delegate_ performSelector:@selector(parser:didFoundPath:) withObject:self withObject:path];
-		[path release];
-		free(dataStringBuffer);
-    }
+		
+	}
+	[delegate_ parser:self didFoundPath:path usingStyle:style usingTransform:transform];
+	[path release];
 	return;
 }
 
@@ -544,7 +610,7 @@ static NSString *arcDirCharacters = @"01?";
 	SVGEllipse svgEllipse;
 	svgEllipse.center = CGPointMake(centerX, centerY);
 	svgEllipse.radiusX = [[attributes objectForKey:@"rx"] floatValue];
-	svgEllipse.radiusX = [[attributes objectForKey:@"ry"] floatValue];
+	svgEllipse.radiusY = [[attributes objectForKey:@"ry"] floatValue];
 
 	[delegate_ parser:self didFoundEllipse:svgEllipse usingStyle:style usingTransform:transform];		
 }

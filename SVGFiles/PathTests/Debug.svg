@@ -1,0 +1,13 @@
+<?xml version="1.0" standalone="no"?> 
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"> 
+<svg width="12cm" height="4cm" viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg" version="1.1"> 
+	<line style="stroke:#000000;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2;" x1="414.069" y1="579.796" x2="412.873" y2="603.585"/>
+	<path style="fill:none;stroke:#000000;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;" d="M738.404,586.247
+		c-1.976-24.023-1.414-67.85-1.736-91.524c-1.024-74.821,4.999-92.223,2.659-150.373"/>
+		<path style="fill:#000000;stroke:#000000;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2;" d="
+			M320.129,488.177c-0.109-3.019,0.175-5.943,0.788-8.693c0.401,6.212,4.462,10.925,9.241,10.598
+			c4.883-0.336,8.652-5.815,8.416-12.235c-0.234-6.422-4.387-11.356-9.271-11.021c-1.019,0.069-1.986,0.375-2.885,0.857
+			c3.353-4.173,7.804-6.865,12.769-7.206c11.054-0.759,20.453,10.409,20.985,24.949c0.536,14.536-7.996,26.938-19.056,27.699
+			C330.06,513.883,320.665,502.714,320.129,488.177z"/>
+	
+</svg>
