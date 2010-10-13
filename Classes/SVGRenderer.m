@@ -7,12 +7,16 @@
 //
 
 #import "SVGRenderer.h"
+#import "UIColor-Expanded.h"
+
 
 @interface SVGRenderer()
-- (void) fillAndStrokePathUsingStyle:(SVGStyle *) style usingContext:(CGContextRef) context;
+- (void) fillAndStrokePathUsingStyle:(NSDictionary *) style usingContext:(CGContextRef) context;
 - (CGPathRef) newEllipseInRect:(CGRect) rect usingTransform:(SVGTransform) transform;
-- (void) renderPath:(CGPathRef) path usingStyle:(SVGStyle *) style usingContext:(CGContextRef) context;
+- (void) renderPath:(CGPathRef) path usingStyle:(NSDictionary *) style usingContext:(CGContextRef) context;
 - (CGMutablePathRef) newLines:(NSArray *) lines usingTransform:(SVGTransform) transform;
+- (UIColor *) parseColorFromString:(NSString *) colorValue;
+- (void) setSVGStyleDefaultsInContext:(CGContextRef) context;
 @end
 
 @implementation SVGRenderer
@@ -74,14 +78,21 @@
 		// Not rounded so just add the rectangle
 		CGPathAddRect(cgPath, &cgTransform, svgRect.rect);
 	} else {
-//		CGAffineTransform theTransform = CGAffineTransformMakeTranslation(CGRectGetMinX(svgRect.rect), CGRectGetMinY(svgRect.rect));
+        // Translate the below to lower-left corner of the rectangle, so that origin is at 0,0 and we can work
+        // with the width and height of the rectangle only.
 		CGAffineTransform theTransform = CGAffineTransformTranslate(cgTransform, CGRectGetMinX(svgRect.rect), CGRectGetMinY(svgRect.rect));
+
+        // Do the below scaling so that if ovalWidth != ovalHeight, we create a normalized
+        // system where they are equal and can use the CGContextAddArcToPoint which expects a circle not oval.
+        // At this point ovalWidth and ovalHeight are normalized to 1.0 and hence the radius is 0.5
+		
 		theTransform = CGAffineTransformScale(theTransform, svgRect.radiusX, svgRect.radiusY);
 		
 		// Now unscale the width and height of the rectangle
 		fw = CGRectGetWidth(svgRect.rect) / svgRect.radiusX;
 		fh = CGRectGetHeight(svgRect.rect) / svgRect.radiusY;
-		
+
+		// Start at the right side of rectangle half point of the height and go counterclockwise
 		CGPathMoveToPoint(cgPath, &theTransform, fw, fh/2);
 		
 		CGPathAddArcToPoint(cgPath, &theTransform, fw, fh, fw/2, fh, 0.5);
@@ -128,12 +139,13 @@
 
 - (void) renderSVGUsingParser:(SVGParser *) parser inContext:(CGContextRef) context {
 	context_ = context;
+	[self setSVGStyleDefaultsInContext:context];
 	[parser setDelegate:self];
 	[parser parse];
 }
 
 - (void) renderSVGPath:(NSArray *) path 
-			usingStyle:(SVGStyle *) style 
+			usingStyle:(NSDictionary *) style 
 		usingTransform:(SVGTransform) transform 
 			 inContext:(CGContextRef) context {
 	CGPathRef cgPath = [self newPathUsingSVGPath:path usingTransform:transform];
@@ -142,48 +154,16 @@
 }
 
 - (void) renderSVGRect:(SVGRect) svgRect 
-			usingStyle:(SVGStyle *) style 
+			usingStyle:(NSDictionary *) style 
 		usingTransform:(SVGTransform) transform 
 			 inContext:(CGContextRef) context {
-//	CGContextBeginPath(context);
-//	if (svgRect.radiusX == 0.0 || svgRect.radiusY == 0.0) {
-//        // Not rounded so just add the rectangle
-//        CGContextAddRect(context, svgRect.rect);
-//    } else {
-//        CGContextSaveGState(context);
-//        
-//        // Translate the below to lower-left corner of the rectangle, so that origin is at 0,0 and we can work
-//        // with the width and height of the rectangle only.
-//        CGContextTranslateCTM(context, CGRectGetMinX(svgRect.rect), CGRectGetMinY(svgRect.rect));
-//        
-//        // Do the below scaling so that if ovalWidth != ovalHeight, we create a normalized
-//        // system where they are equal and can use the CGContextAddArcToPoint which expects a circle not oval.
-//        // At this point ovalWidth and ovalHeight are normalized to 1.0 and hence the radius is 0.5
-//        CGContextScaleCTM(context, svgRect.radiusX, svgRect.radiusY);
-//        
-//        // Now unscale the width and height of the rectangle
-//        CGFloat fw = CGRectGetWidth(svgRect.rect) / svgRect.radiusX;
-//        CGFloat fh = CGRectGetHeight(svgRect.rect) / svgRect.radiusY;
-//        
-//        // Start at the right side of rectangle half point of the height and go counterclockwise
-//        CGContextMoveToPoint(context, fw, fh/2);
-//        
-//        CGContextAddArcToPoint(context, fw, fh, fw/2, fh, 0.5);
-//        CGContextAddArcToPoint(context, 0, fh, 0, fh/2, 0.5);
-//        CGContextAddArcToPoint(context, 0, 0, fw/2, 0, 0.5);
-//        CGContextAddArcToPoint(context, fw, 0, fw, fh/2, 0.5);
-//		
-//        CGContextClosePath(context);
-//        
-//        CGContextRestoreGState(context);
-//    }
 	CGPathRef cgPath = [self newRectPathUsingSVGRect:svgRect usingTransform:transform];
 	[self renderPath:cgPath usingStyle:style usingContext:context];
 	CGPathRelease(cgPath);
 }
 
 - (void) renderSVGCircle:(SVGCircle) circle 
-			  usingStyle:(SVGStyle *) style 
+			  usingStyle:(NSDictionary *) style 
 		  usingTransform:(SVGTransform) transform 
 			   inContext:(CGContextRef) context {
 	CGPathRef cgPath = [self newCirclePathUsingSVGCircle:circle usingTransform:transform]; 
@@ -192,7 +172,7 @@
 }
 
 - (void) renderSVGEllipse:(SVGEllipse) ellipse 
-			   usingStyle:(SVGStyle *) style 
+			   usingStyle:(NSDictionary *) style 
 		   usingTransform:(SVGTransform) transform 
 				inContext:(CGContextRef) context {
 	CGPathRef cgPath = [self newEllipsePathUsingSVGEllipse:ellipse usingTransform:transform];
@@ -201,7 +181,7 @@
 }
 
 - (void) renderSVGLine:(SVGLine) line 
-			usingStyle:(SVGStyle *) style 
+			usingStyle:(NSDictionary *) style 
 		usingTransform:(SVGTransform) transform 
 			 inContext:(CGContextRef) context {
 	CGPathRef cgPath = [self newLinePathUsingSVGLine:line usingTransform:transform];
@@ -210,7 +190,7 @@
 }
 
 - (void) renderSVGPolyline:(NSArray *) polyline 
-				usingStyle:(SVGStyle *) style 
+				usingStyle:(NSDictionary *) style 
 			usingTransform:(SVGTransform) transform 
 				 inContext:(CGContextRef) context {
 	CGPathRef cgPath = [self newPolylinePathUsingSVGPolyline:polyline usingTransform:transform];
@@ -219,7 +199,7 @@
 }
 
 - (void) renderSVGPolygon:(NSArray *) polygon 
-			   usingStyle:(SVGStyle *) style 
+			   usingStyle:(NSDictionary *) style 
 		   usingTransform:(SVGTransform) transform 
 				inContext:(CGContextRef) context {
 	CGPathRef cgPath = [self newPolygonPathUsingSVGPolygon:polygon usingTransform:transform];
@@ -227,15 +207,79 @@
 	CGPathRelease(cgPath);	
 }
 
-- (void) setContext:(CGContextRef) context usingStyle:(SVGStyle *) style {
-	CGContextSetFillColorWithColor(context, [style.fillColor CGColor]);
-	CGContextSetStrokeColorWithColor(context, [style.strokeColor CGColor]);
-	CGContextSetMiterLimit(context, style.strokeMiterLimit);
-	CGContextSetLineWidth(context, style.strokeWidth);
-	CGContextSetLineJoin(context, style.strokeLineJoin);
-	CGContextSetLineCap(context, style.strokeLineCap);
-	CGContextSetAlpha(context, style.strokeOpacity);
+- (void) setSVGStyleDefaultsInContext:(CGContextRef) context {	
+	CGContextSetFillColorWithColor(context, [[UIColor blackColor] CGColor]);
+	CGContextSetStrokeColorWithColor(context, [[UIColor clearColor] CGColor]);
+	CGContextSetAlpha(context, 1.0f);
+	CGContextSetMiterLimit(context, 4.0f);
+	CGContextSetLineWidth(context, 1.0f);
+	CGContextSetLineCap(context, kCGLineCapButt);
+	CGContextSetLineJoin(context, kCGLineJoinMiter);
 }
+
+- (void) setContext:(CGContextRef) context usingStyle:(NSDictionary *) style {
+	
+	NSString *fillColorValue = [style objectForKey:@"fill-color"];
+	if (nil != fillColorValue) {
+		UIColor *color = [self parseColorFromString:fillColorValue];
+		CGContextSetFillColorWithColor(context, [color CGColor]);
+	}
+	NSString *strokeColorValue = [style objectForKey:@"stroke-color"];
+	if (nil != strokeColorValue) {
+		UIColor *color = [self parseColorFromString:strokeColorValue];
+		CGContextSetFillColorWithColor(context, [color CGColor]);
+	}
+	NSString *strokeMiterLimitValue = [style objectForKey:@"stroke-miterlimit"];
+	if (nil != strokeMiterLimitValue) {
+		CGContextSetMiterLimit(context, [strokeMiterLimitValue floatValue]);
+	}
+	NSString *strokeWidthValue = [style objectForKey:@"stroke-width"];
+	if (nil != strokeWidthValue) {
+		CGContextSetLineWidth(context, [strokeWidthValue floatValue]);
+	}
+
+	NSString *strokeOpacityValue = [style objectForKey:@"opacity"];
+	if (nil != strokeOpacityValue) {
+		CGContextSetAlpha(context, [strokeOpacityValue floatValue]);		
+	}
+	
+	NSString *strokeLineJoinValue = [style objectForKey:@"stroke-linejoin"];
+	if (nil != strokeLineJoinValue) {
+		if ([strokeLineJoinValue isEqualToString:@"miter"]) {
+			CGContextSetLineJoin(context, kCGLineJoinMiter);
+		} else if ([strokeLineJoinValue isEqualToString:@"round"]) {
+			CGContextSetLineJoin(context, kCGLineJoinRound);
+		} else if ([strokeLineJoinValue isEqualToString:@"bevel"]) {
+			CGContextSetLineJoin(context, kCGLineJoinBevel);
+		}
+	}
+	
+	NSString *strokeLineCapValue = [style objectForKey:@"stroke-linecap"];
+	if (nil != strokeLineCapValue) {
+		if ([strokeLineCapValue isEqualToString:@"butt"]) {
+			CGContextSetLineJoin(context, kCGLineCapButt);
+		} else if ([strokeLineCapValue isEqualToString:@"round"]) {
+			CGContextSetLineJoin(context, kCGLineCapRound);
+		} else if ([strokeLineCapValue isEqualToString:@"square"]) {
+			CGContextSetLineJoin(context, kCGLineCapSquare);
+		}
+	}
+}
+
+- (UIColor *) parseColorFromString:(NSString *) colorValue {
+	UIColor *color;
+	NSScanner *scanner = [NSScanner scannerWithString:colorValue];
+	if ([scanner scanString:@"none" intoString:NULL]) {
+		color = [UIColor clearColor];
+	} else {
+		color = [UIColor colorWithName:colorValue];
+		if (color == nil) {
+			color = [UIColor colorWithHexString:colorValue];
+		}
+	}
+	return color;
+}
+
 
 - (CGAffineTransform) transformUsingSVGTransform:(SVGTransform) transform {
 	CGAffineTransform cgTransform = CGAffineTransformIdentity;	
@@ -300,7 +344,7 @@
 	return cgPath;
 }
 
-- (void) renderPath:(CGPathRef) path usingStyle:(SVGStyle *) style usingContext:(CGContextRef) context {
+- (void) renderPath:(CGPathRef) path usingStyle:(NSDictionary *) style usingContext:(CGContextRef) context {
 	CGContextSaveGState(context);
 	[self setContext:context usingStyle:style];
 	CGContextAddPath(context, path);
@@ -309,23 +353,35 @@
 	CGContextRestoreGState(context);
 }
 
-- (void) fillAndStrokePathUsingStyle:(SVGStyle *) style usingContext:(CGContextRef) context {
-	switch (style.fillRule) {
-		case FillRuleEvenOdd:
-			CGContextDrawPath(context, kCGPathEOFillStroke);
-			break;
-		case FillRuleNonZero:
-			CGContextDrawPath(context, kCGPathFillStroke);
-			break;
-		default:
-			break;
+- (void) fillAndStrokePathUsingStyle:(NSDictionary *) style usingContext:(CGContextRef) context {
+	NSString *fillRule = [style objectForKey:@"fill-rule"];
+	
+	if (nil == fillRule) {
+		fillRule = "nonzero";
+	}
+	if ([fillRule isEqualToString:@"nonzero"]) {
+		CGContextDrawPath(context, kCGPathFillStroke);
+	} else if ([fillRule isEqualToString:@"evenodd"]) {
+		CGContextDrawPath(context, kCGPathEOFillStroke);
 	}
 }
 
 #pragma mark SVGParserDelegate methods
 
+- (void) parser:(SVGParser *) parser didBeginGroup:(SVGGroup *) group {
+	CGContextSaveGState(context_);
+	CGAffineTransform transform = [self transformUsingSVGTransform:group.transform];
+	CGContextConcatCTM(context_, transform);
+
+	[self setContext:context_ usingStyle:group.style];
+}
+
+- (void) parser:(SVGParser *)parser didEndGroup:(SVGGroup *)group {
+	CGContextRestoreGState(context_);
+}
+
 - (void) parser:(SVGParser *) parser didFoundPath:(NSArray *) path 
-	 usingStyle:(SVGStyle *) style 
+	 usingStyle:(NSDictionary *) style 
  usingTransform:(SVGTransform) transform {
 	
 	if (NULL != context_) {
@@ -334,7 +390,7 @@
 }
 
 - (void) parser:(SVGParser *) parser didFoundRect:(SVGRect) rect 
-	 usingStyle:(SVGStyle *) style 
+	 usingStyle:(NSDictionary *) style 
  usingTransform:(SVGTransform) transform {
 	
 	if (NULL != context_) {
@@ -343,7 +399,7 @@
 }
 
 - (void) parser:(SVGParser *) parser didFoundCircle:(SVGCircle) circle 
-	 usingStyle:(SVGStyle *) style 
+	 usingStyle:(NSDictionary *) style 
  usingTransform:(SVGTransform) transform {
 	
 	if (NULL != context_) {
@@ -353,7 +409,7 @@
 }
 
 - (void) parser:(SVGParser *) parser didFoundEllipse:(SVGEllipse) ellipse 
-	 usingStyle:(SVGStyle *) style 
+	 usingStyle:(NSDictionary *) style 
  usingTransform:(SVGTransform) transform {
 	
 	if (NULL != context_) {
@@ -362,7 +418,7 @@
 }
 
 - (void) parser:(SVGParser *) parser didFoundLine:(SVGLine) line 
-	 usingStyle:(SVGStyle *) style 
+	 usingStyle:(NSDictionary *) style 
  usingTransform:(SVGTransform) transform {
 	
 	if (NULL != context_) {
@@ -371,7 +427,7 @@
 }
 	
 - (void) parser:(SVGParser *) parser didFoundPolyline:(NSArray *) polyline 
-	 usingStyle:(SVGStyle *) style 
+	 usingStyle:(NSDictionary *) style 
  usingTransform:(SVGTransform) transform {
 	if (NULL != context_) {
 		[self renderSVGPolyline:polyline usingStyle:style usingTransform:transform inContext:context_];
@@ -379,7 +435,7 @@
 }
 
 - (void) parser:(SVGParser *) parser didFoundPolygon:(NSArray *) polygon 
-	 usingStyle:(SVGStyle *) style 
+	 usingStyle:(NSDictionary *) style 
  usingTransform:(SVGTransform) transform {
 	if (NULL != context_) {
 		[self renderSVGPolygon:polygon usingStyle:style usingTransform:transform inContext:context_];

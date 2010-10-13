@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "SVGGroup.h"
-#import "SVGStyle.h"
 #import "SVGShapes.h"
 
 #include "SVGTransform.h"
@@ -31,9 +30,10 @@
 @private    
     NSXMLParser *xmlParser_;
     NSArray *svgElements_;
+	NSArray *svgContainerElements_;
+	NSArray *styleAttributes_;
     NSMutableArray *groups_;
-    SVGGroup *currentGroup_;
-	id<SVGParserDelegate> delegate_;
+ 	id<SVGParserDelegate> delegate_;
 	
 	CGPoint curPoint_;
 	CGPoint initialPoint_;
@@ -51,25 +51,27 @@
 
 @protocol SVGParserDelegate<NSObject>
 @required
+- (void) parser:(SVGParser *) parser didBeginGroup:(SVGGroup *) group;
+- (void) parser:(SVGParser *) parser didEndGroup:(SVGGroup *) group;
 - (void) parser:(SVGParser *) parser didFoundPath:(NSArray *) path 
-	 usingStyle:(SVGStyle *) style 
+	 usingStyle:(NSDictionary *) style 
  usingTransform:(SVGTransform) transform;
 - (void) parser:(SVGParser *) parser didFoundRect:(SVGRect) rect 
-	 usingStyle:(SVGStyle *) style 
+	 usingStyle:(NSDictionary *) style 
  usingTransform:(SVGTransform) transform;
 - (void) parser:(SVGParser *) parser didFoundCircle:(SVGCircle) circle 
-	 usingStyle:(SVGStyle *) style 
+	 usingStyle:(NSDictionary *) style 
  usingTransform:(SVGTransform) transform;
 - (void) parser:(SVGParser *) parser didFoundEllipse:(SVGEllipse) ellipse 
-	 usingStyle:(SVGStyle *) style 
+	 usingStyle:(NSDictionary *) style 
  usingTransform:(SVGTransform) transform;
 - (void) parser:(SVGParser *) parser didFoundLine:(SVGLine) line 
-	 usingStyle:(SVGStyle *) style 
+	 usingStyle:(NSDictionary *) style 
  usingTransform:(SVGTransform) transform;
 - (void) parser:(SVGParser *) parser didFoundPolyline:(NSArray *) polyline 
-	 usingStyle:(SVGStyle *) style 
+	 usingStyle:(NSDictionary *) style 
  usingTransform:(SVGTransform) transform;
 - (void) parser:(SVGParser *) parser didFoundPolygon:(NSArray *) polygon 
-	 usingStyle:(SVGStyle *) style 
+	 usingStyle:(NSDictionary *) style 
  usingTransform:(SVGTransform) transform;
 @end

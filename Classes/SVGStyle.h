@@ -28,6 +28,8 @@ typedef enum SVGFillRule {
 } SVGFillRule;
 
 @interface SVGStyle : NSObject {
+//	NSMutableDictionary *propValueHistoryDict_;
+	
 	UIColor *fillColor;
 	SVGFillRule fillRule;
 	CGFloat fillOpacity;

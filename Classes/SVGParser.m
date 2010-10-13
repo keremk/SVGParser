@@ -37,7 +37,6 @@ typedef enum SVGBezierType {
 - (void) initParser;
 
 @property (nonatomic, retain) NSXMLParser *xmlParser;
-@property (nonatomic, retain) SVGGroup *currentGroup;
 
 - (void) addMoveToUsingRelative:(BOOL) isRelative toPath:(NSMutableArray *)path usingScanner:(NSScanner *) scanner;
 - (void) addLineToOfType:(SVGLineType) lineType 
@@ -52,20 +51,20 @@ typedef enum SVGBezierType {
 - (void) addEllipticalArcUsingRelative:(BOOL) isRelative 
 								toPath:(NSMutableArray *) path 
 						  usingScanner:(NSScanner *) scanner;
-- (SVGStyle *) handleStyleUsingAttributes:(NSDictionary *) attributes;
+- (NSDictionary *) handleStyleUsingAttributes:(NSDictionary *) attributes;
 - (SVGTransform) handleTransformUsingAttributes:(NSDictionary *) attributes;
 - (void) handlePolylinesUsingAttributes:(NSDictionary *) attributes isPolygon:(BOOL) isPolygon;
-- (UIColor *) parseColorFromString:(NSString *) colorValue;
 @end
 
 @implementation SVGParser
 @synthesize xmlParser = xmlParser_;
-@synthesize currentGroup = currentGroup_;
 @synthesize delegate = delegate_;
 
 - (void) dealloc {
     [xmlParser_ release], xmlParser_ = nil;
     [svgElements_ release], svgElements_ = nil;
+	[svgContainerElements_ release], svgContainerElements_ = nil; 
+	[styleAttributes_ release], styleAttributes_ = nil;
     [groups_ release], groups_ = nil;
     [super dealloc];
 }
@@ -95,7 +94,12 @@ typedef enum SVGBezierType {
 - (void) initParser {
     [xmlParser_ setDelegate:self];
     svgElements_ = [[NSArray alloc] initWithObjects:@"path", @"circle", @"ellipse", @"line", @"polyline", @"rect", @"polygon", @"image", nil];
-    groups_ = [[NSMutableArray alloc] init];            
+    svgContainerElements_ = [[NSArray alloc] initWithObjects:@"svg", @"g", nil]; 
+	styleAttributes_ = [NSArray arrayWithObjects:@"opacity", @"fill", @"fill-rule", @"fill-opacity",
+					   @"stroke", @"stroke-width", @"stroke-linecap", @"stroke-linejoin", 
+					   @"stroke-miterlimit", @"stroke-dasharray", nil];		
+	
+	groups_ = [[NSMutableArray alloc] init];  
 }
 
 - (BOOL) parse {
@@ -107,29 +111,38 @@ typedef enum SVGBezierType {
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict {
     
-    if ([elementName isEqualToString:@"g"]) {
-        SVGGroup *newGroup = [[SVGGroup alloc] init];
-        [groups_ addObject:newGroup];
-        self.currentGroup = newGroup;
+	for (NSString *svgElement in svgContainerElements_) {
+        if ([elementName isEqualToString:svgElement]) { 
+            NSString *elementHandlerString = [NSString stringWithFormat:@"handle%@StartTagUsingAttributes:", [svgElement capitalizedString]];
+            if ([self respondsToSelector:NSSelectorFromString(elementHandlerString)]) {
+                [self performSelector:NSSelectorFromString(elementHandlerString) withObject:attributeDict];
+            }
+            break;
+        }
     }
-    
+	
     for (NSString *svgElement in svgElements_) {
         if ([elementName isEqualToString:svgElement]) { 
             NSString *elementHandlerString = [NSString stringWithFormat:@"handle%@UsingAttributes:", [svgElement capitalizedString]];
             if ([self respondsToSelector:NSSelectorFromString(elementHandlerString)]) {
                 [self performSelector:NSSelectorFromString(elementHandlerString) withObject:attributeDict];
             }
-            
+            break;
         }
     }
-    
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
-    if ([elementName isEqualToString:@"g"]) {
-        [groups_ removeLastObject];
-        self.currentGroup = [groups_ lastObject];
-    }
+	
+	for (NSString *svgElement in svgContainerElements_) {
+        if ([elementName isEqualToString:svgElement]) { 
+            NSString *elementHandlerString = [NSString stringWithFormat:@"handle%@EndTag", [svgElement capitalizedString]];
+            if ([self respondsToSelector:NSSelectorFromString(elementHandlerString)]) {
+                [self performSelector:NSSelectorFromString(elementHandlerString)];
+            }
+            break;
+        }
+    }	
 }
 
 
@@ -205,8 +218,35 @@ static NSString *arcDirCharacters = @"01?";
 	return commands;
 }
 
+- (void) handleSvgStartTagUsingAttributes:(NSDictionary *) attributes {
+	
+}
+
+- (void) handleSvgEndTag{
+	
+}
+
+- (void) handleGStartTagUsingAttributes:(NSDictionary *) attributes {
+	SVGGroup *group = [[SVGGroup alloc] init];
+	group.groupId = [attributes objectForKey:@"id"];
+	group.style = [self handleStyleUsingAttributes:attributes];
+	group.transform = [self handleTransformUsingAttributes:attributes];
+	
+	[groups_ addObject:group];
+
+	[delegate_ parser:self didBeginGroup:group];
+	[group release];
+}
+
+- (void) handleGEndTag {	
+	SVGGroup *group = [groups_ lastObject];
+	[delegate_ parser:self didEndGroup:group];
+	
+	[groups_ removeLastObject];
+}
+
 - (void) handlePathUsingAttributes:(NSDictionary *) attributes {
-	SVGStyle *style = [self handleStyleUsingAttributes:attributes];
+	NSDictionary *style = [self handleStyleUsingAttributes:attributes];
 	SVGTransform transform = [self handleTransformUsingAttributes:attributes];
 	NSString *dataString = [attributes objectForKey:d];
 	NSArray *commandArray = [self parseCommands:dataString];
@@ -559,7 +599,7 @@ static NSString *arcDirCharacters = @"01?";
 }
 
 - (void) handleRectUsingAttributes:(NSDictionary *) attributes {
-	SVGStyle *style = [self handleStyleUsingAttributes:attributes];
+	NSDictionary *style = [self handleStyleUsingAttributes:attributes];
 	SVGTransform transform = [self handleTransformUsingAttributes:attributes];
     	
 	CGFloat xCoord = [[attributes objectForKey:@"x"] floatValue];
@@ -587,7 +627,7 @@ static NSString *arcDirCharacters = @"01?";
 }
 
 - (void) handleCircleUsingAttributes:(NSDictionary *) attributes {
-	SVGStyle *style = [self handleStyleUsingAttributes:attributes];
+	NSDictionary *style = [self handleStyleUsingAttributes:attributes];
 	SVGTransform transform = [self handleTransformUsingAttributes:attributes];
    
 	CGFloat centerX = [[attributes objectForKey:@"cx"] floatValue];
@@ -601,7 +641,7 @@ static NSString *arcDirCharacters = @"01?";
 }
 
 - (void) handleEllipseUsingAttributes:(NSDictionary *) attributes {
-	SVGStyle *style = [self handleStyleUsingAttributes:attributes];
+	NSDictionary *style = [self handleStyleUsingAttributes:attributes];
 	SVGTransform transform = [self handleTransformUsingAttributes:attributes];
 
 	CGFloat centerX = [[attributes objectForKey:@"cx"] floatValue];
@@ -616,7 +656,7 @@ static NSString *arcDirCharacters = @"01?";
 }
 
 - (void) handleLineUsingAttributes:(NSDictionary *) attributes {
-	SVGStyle *style = [self handleStyleUsingAttributes:attributes];
+	NSDictionary *style = [self handleStyleUsingAttributes:attributes];
 	SVGTransform transform = [self handleTransformUsingAttributes:attributes];
 
 	CGFloat startX = [[attributes objectForKey:@"x1"] floatValue];
@@ -640,7 +680,7 @@ static NSString *arcDirCharacters = @"01?";
 }
 
 - (void) handlePolylinesUsingAttributes:(NSDictionary *) attributes isPolygon:(BOOL) isPolygon {
-	SVGStyle *style = [self handleStyleUsingAttributes:attributes];
+	NSDictionary *style = [self handleStyleUsingAttributes:attributes];
 	SVGTransform transform = [self handleTransformUsingAttributes:attributes];
 	NSMutableArray *polyline = [NSMutableArray array];
 	
@@ -669,81 +709,88 @@ static NSString *arcDirCharacters = @"01?";
     
 }
 
-- (SVGStyle *) handleStyleUsingAttributes:(NSDictionary *) attributes {
-	NSMutableArray *styleValues;
-	NSMutableArray *styleAttributes;
-	NSString *notFound = @"not-found";
-	SVGStyle *style = [[[SVGStyle alloc] init] autorelease];
-
+- (NSDictionary *) handleStyleUsingAttributes:(NSDictionary *) attributes {
+//	SVGStyle *style = [[[SVGStyle alloc] init] autorelease];
+	
+	NSMutableDictionary *style = [NSMutableDictionary dictionary];
 	NSString *styleString = [attributes objectForKey:@"style"];
-	if (styleString == nil) {
-		styleAttributes = [NSArray arrayWithObjects:@"fill", @"stroke", 
-						   @"stroke-width", @"stroke-linecap", @"stroke-linejoin", 
-						   @"stroke-miterlimit", nil];		
-		styleValues = [attributes objectsForKeys:styleAttributes notFoundMarker:notFound];
+	if (nil == styleString) {
+		for (NSString *styleAttribute in styleAttributes_) {
+			NSString *styleValue = [attributes objectForKey:styleAttribute];
+			if (nil != styleValue) {
+				[style setObject:styleValue forKey:styleAttribute];
+			}
+		}
 	} else {
-		styleValues = [NSMutableArray array];
-		styleAttributes = [NSMutableArray array];
 		NSArray *stylesMentionedInString = [styleString componentsSeparatedByString:@";"];
 		for (NSString *styleString in stylesMentionedInString) {
 			NSArray *comps = [styleString componentsSeparatedByString:@":"];
 			if ([comps count] == 2) {
-				[styleAttributes addObject:[comps objectAtIndex:0]];
-				[styleValues addObject:[comps objectAtIndex:1]];
+				NSString *styleValue = [comps objectAtIndex:1];
+				NSString *styleAttribute = [comps objectAtIndex:0];
+				[style setObject:styleValue forKey:styleAttribute];
 			}
-		}
+		}		
 	}
 
-	NSUInteger count = [styleAttributes count];
-	for (NSInteger i = 0; i < count; i++) {
-		NSString *styleName = [styleAttributes objectAtIndex:i];
-		NSString *styleValue = [styleValues objectAtIndex:i];
-		
-		if (![styleValue isEqualToString:notFound]) { 
-			if ([styleName isEqualToString:@"fill"]) {
-				style.fillColor = [self parseColorFromString:styleValue];
-			} else if ([styleName isEqualToString:@"stroke"]) {
-				style.strokeColor = [self parseColorFromString:styleValue];
-			} else if ([styleName isEqualToString:@"stroke-width"]) {
-				style.strokeWidth = [styleValue floatValue];
-			} else if ([styleName isEqualToString:@"stroke-linecap"]) {
-				if ([styleValue isEqualToString:@"butt"]) {
-					style.strokeLineCap = LineCapButt;
-				} else if ([styleValue isEqualToString:@"round"]) {
-					style.strokeLineCap = LineCapRound;
-				} else if ([styleValue isEqualToString:@"square"]) {
-					style.strokeLineCap	= LineCapSquare;
-				}
-			} else if ([styleName isEqualToString:@"stroke-linejoin"]) {
-				if ([styleValue isEqualToString:@"miter"]) {
-					style.strokeLineJoin = LineJoinMiter;
-				} else if ([styleValue isEqualToString:@"round"]) {
-					style.strokeLineJoin = LineJoinRound;
-				} else if ([styleValue isEqualToString:@"bevel"]) {
-					style.strokeLineJoin = LineJoinBevel;
-				}				
-			} else if ([styleName isEqualToString:@"stroke-miterlimit"]) {
-				style.strokeMiterLimit = [styleValue floatValue];
-			}	
-		}
-	}
-	
 	return style;
 }
+//	NSString *styleString = [attributes objectForKey:@"style"];
+//	if (styleString == nil) {
+//		styleAttributes = [NSArray arrayWithObjects:@"opacity", @"fill", @"fill-rule", @"fill-opacity",
+//						   @"stroke", @"stroke-width", @"stroke-linecap", @"stroke-linejoin", 
+//						   @"stroke-miterlimit", @"stroke-dasharray", nil];		
+//		styleValues = [attributes objectsForKeys:styleAttributes notFoundMarker:notFound];
+//	} else {
+//		styleValues = [NSMutableArray array];
+//		styleAttributes = [NSMutableArray array];
+//		NSArray *stylesMentionedInString = [styleString componentsSeparatedByString:@";"];
+//		for (NSString *styleString in stylesMentionedInString) {
+//			NSArray *comps = [styleString componentsSeparatedByString:@":"];
+//			if ([comps count] == 2) {
+//				[styleAttributes addObject:[comps objectAtIndex:0]];
+//				[styleValues addObject:[comps objectAtIndex:1]];
+//			}
+//		}
+//	}
 
-- (UIColor *) parseColorFromString:(NSString *) colorValue {
-	UIColor *color;
-	NSScanner *scanner = [NSScanner scannerWithString:colorValue];
-	if ([scanner scanString:@"none" intoString:NULL]) {
-		color = [UIColor clearColor];
-	} else {
-		color = [UIColor colorWithName:colorValue];
-		if (color == nil) {
-			color = [UIColor colorWithHexString:colorValue];
-		}
-	}
-	return color;
-}
+//	NSUInteger count = [styleAttributes count];
+//	for (NSInteger i = 0; i < count; i++) {
+//		NSString *styleName = [styleAttributes objectAtIndex:i];
+//		NSString *styleValue = [styleValues objectAtIndex:i];
+//		
+//		if (![styleValue isEqualToString:notFound]) { 
+//			if ([styleName isEqualToString:@"fill"]) {
+//				style.fillColor = [self parseColorFromString:styleValue];
+//			} else if ([styleName isEqualToString:@"stroke"]) {
+//				style.strokeColor = [self parseColorFromString:styleValue];
+//			} else if ([styleName isEqualToString:@"stroke-width"]) {
+//				style.strokeWidth = [styleValue floatValue];
+//			} else if ([styleName isEqualToString:@"stroke-linecap"]) {
+//				if ([styleValue isEqualToString:@"butt"]) {
+//					style.strokeLineCap = LineCapButt;
+//				} else if ([styleValue isEqualToString:@"round"]) {
+//					style.strokeLineCap = LineCapRound;
+//				} else if ([styleValue isEqualToString:@"square"]) {
+//					style.strokeLineCap	= LineCapSquare;
+//				}
+//			} else if ([styleName isEqualToString:@"stroke-linejoin"]) {
+//				if ([styleValue isEqualToString:@"miter"]) {
+//					style.strokeLineJoin = LineJoinMiter;
+//				} else if ([styleValue isEqualToString:@"round"]) {
+//					style.strokeLineJoin = LineJoinRound;
+//				} else if ([styleValue isEqualToString:@"bevel"]) {
+//					style.strokeLineJoin = LineJoinBevel;
+//				}				
+//			} else if ([styleName isEqualToString:@"stroke-miterlimit"]) {
+//				style.strokeMiterLimit = [styleValue floatValue];
+//			}	
+//		}
+//	}
+//	
+//	return style;
+//}
+
 
 #define NUM_MATRIX_ELEMS 6
 

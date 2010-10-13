@@ -7,10 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "SVGTransform.h"
 
 @interface SVGGroup : NSObject {
-
+	NSDictionary *style_;
+	SVGTransform transform_;
+	NSString *groupId_;
 }
+
+@property (nonatomic, retain) NSDictionary *style;
+@property (nonatomic) SVGTransform transform;
+@property (nonatomic, retain) NSString *groupId;
 
 @end
