@@ -6,10 +6,8 @@
 //  Copyright 2010 Coding Ventures. All rights reserved.
 //
 
-#ifndef SVGTRANSFORM_H_
-#define SVGTRANSFORM_H_
-
-#include <CoreGraphics/CoreGraphics.h>
+#import <Foundation/Foundation.h>
+#import <CoreGraphics/CoreGraphics.h>
 
 typedef enum SVGTransformType {
 	none,
@@ -32,4 +30,11 @@ typedef struct SVGTransform {
 	CGFloat skewAngle;
 } SVGTransform;
 
-#endif
+@interface SVGTransformHelper : NSObject {
+
+}
+
++ (CGAffineTransform) transformUsingSVGTransform:(SVGTransform) transform;
+
+@end
+

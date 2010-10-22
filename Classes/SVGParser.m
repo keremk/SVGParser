@@ -95,7 +95,7 @@ typedef enum SVGBezierType {
     [xmlParser_ setDelegate:self];
     svgElements_ = [[NSArray alloc] initWithObjects:@"path", @"circle", @"ellipse", @"line", @"polyline", @"rect", @"polygon", @"image", nil];
     svgContainerElements_ = [[NSArray alloc] initWithObjects:@"svg", @"g", nil]; 
-	styleAttributes_ = [NSArray arrayWithObjects:@"opacity", @"fill", @"fill-rule", @"fill-opacity",
+	styleAttributes_ = [[NSArray alloc] initWithObjects:@"opacity", @"fill", @"fill-rule", @"fill-opacity",
 					   @"stroke", @"stroke-width", @"stroke-linecap", @"stroke-linejoin", 
 					   @"stroke-miterlimit", @"stroke-dasharray", nil];		
 	

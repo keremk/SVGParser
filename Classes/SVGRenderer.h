@@ -10,9 +10,14 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <UIKit/UIKit.h>
 #import "SVGParser.h"
+#import "CVPath.h"
+#import "CVPathGroup.h"
 
 @interface SVGRenderer : NSObject<SVGParserDelegate> {
-	CGContextRef context_;
+//	CGContextRef context_;
+	SVGParser *parser_;
+	CVPathGroup *renderTree_;
+	NSMutableArray *groupStack_;
 }
 
 - (CGMutablePathRef) newPathUsingSVGPath:(NSArray *) path usingTransform:(SVGTransform) transform;
@@ -23,37 +28,8 @@
 - (CGPathRef) newPolylinePathUsingSVGPolyline:(NSArray *) svgPolyline usingTransform:(SVGTransform) transform;
 - (CGPathRef) newPolygonPathUsingSVGPolygon:(NSArray *) svgPolygon usingTransform:(SVGTransform) transform;
 
-- (void) renderSVGUsingParser:(SVGParser *) parser inContext:(CGContextRef) context;
-- (void) renderSVGPath:(NSArray *) path 
-			usingStyle:(NSDictionary *) style 
-		usingTransform:(SVGTransform) transform 
-			 inContext:(CGContextRef) context;
-- (void) renderSVGRect:(SVGRect) rect 
-			usingStyle:(NSDictionary *) style 
-		usingTransform:(SVGTransform) transform 
-			 inContext:(CGContextRef) context;
-- (void) renderSVGCircle:(SVGCircle) circle 
-			usingStyle:(NSDictionary *) style 
-		usingTransform:(SVGTransform) transform 
-			 inContext:(CGContextRef) context;
-- (void) renderSVGEllipse:(SVGEllipse) ellipse 
-			usingStyle:(NSDictionary *) style 
-		usingTransform:(SVGTransform) transform 
-			 inContext:(CGContextRef) context;
-- (void) renderSVGLine:(SVGLine) line 
-			   usingStyle:(NSDictionary *) style 
-		   usingTransform:(SVGTransform) transform 
-				inContext:(CGContextRef) context;
-- (void) renderSVGPolyline:(NSArray *) polyline 
-			usingStyle:(NSDictionary *) style 
-		usingTransform:(SVGTransform) transform 
-			 inContext:(CGContextRef) context;
-- (void) renderSVGPolygon:(NSArray *) polygon 
-				usingStyle:(NSDictionary *) style 
-			usingTransform:(SVGTransform) transform 
-				 inContext:(CGContextRef) context;
+- (void) renderInContext:(CGContextRef) context;
+- (id) initWithParser:(SVGParser *)parser;
 
-- (void) setContext:(CGContextRef) context usingStyle:(NSDictionary *) style;
-- (CGAffineTransform) transformUsingSVGTransform:(SVGTransform) transform;
-
+@property (nonatomic, retain) CVPathGroup *renderTree;
 @end

@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-
-#include <CoreGraphics/CoreGraphics.h>
+#import "UIColor-Expanded.h"
+#import <CoreGraphics/CoreGraphics.h>
 
 typedef struct SVGCircle {
     CGPoint center;
@@ -47,6 +47,16 @@ typedef enum SVGSweepFlag {
 	sweepOff,
 	sweepBoth
 } SVGSweepFlag;
+
+@interface SVGStyleHelper : NSObject {
+
+}
+
++ (void) setContext:(CGContextRef) context usingStyle:(NSDictionary *) style;
++ (UIColor *) parseColorFromString:(NSString *) colorValue;
+
+@end
+
 
 @interface SVGPathElement : NSObject {
 	SVGElementType elementType;
