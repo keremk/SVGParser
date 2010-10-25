@@ -26,11 +26,14 @@
 
 #else                           // all code under test must be linked into the Unit Test bundle
 
-static NSString *basePath = @"/Users/kkaratal/Developer/SVGParser/SVGFiles";
+
+// Change the below based on where your project is installed 
+//static NSString *basePath = @"/Users/kkaratal/Developer/SVGParser/SVGFiles";
+static NSString *basePath = @"/Users/kkaratal/Developer/IPhone/Projects/SVGParser/SVGFiles";
 
 - (void) testRenderPathWithLines {
-	NSArray *testFilenames = [NSArray arrayWithObjects:@"Triangle.svg", @"RoundedRect.svg",
-							  @"Polyline.svg", @"Polygon.svg", @"Ellipse.svg", @"Bear01.svg", nil];
+    NSArray *testFilenames = [NSArray arrayWithObjects:@"Triangle.svg", @"RoundedRect.svg",
+							  @"Polyline.svg", @"Polygon.svg", @"Ellipse.svg", @"Bear01.svg", @"TransformsAndGroups.svg", nil];
 	
 	for (NSInteger i = 0; i < [testFilenames count]; i++) {
 		NSString *testSVGFilename = [testFilenames objectAtIndex:i];
@@ -51,7 +54,7 @@ static NSString *basePath = @"/Users/kkaratal/Developer/SVGParser/SVGFiles";
 }
 
 - (void) testDebugPaths {
-	NSArray *testFilenames = [NSArray arrayWithObjects:@"TransformsAndGroups.svg", nil];
+	NSArray *testFilenames = [NSArray arrayWithObjects:@"Polyline.svg", nil];
 	
 	for (NSInteger i = 0; i < [testFilenames count]; i++) {
 		NSString *testSVGFilename = [testFilenames objectAtIndex:i];

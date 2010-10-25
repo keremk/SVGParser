@@ -54,6 +54,8 @@ typedef enum SVGBezierType {
 - (NSDictionary *) handleStyleUsingAttributes:(NSDictionary *) attributes;
 - (SVGTransform) handleTransformUsingAttributes:(NSDictionary *) attributes;
 - (void) handlePolylinesUsingAttributes:(NSDictionary *) attributes isPolygon:(BOOL) isPolygon;
+- (SVGGroup *) handleBeginGroupTagsUsingAttributes:(NSDictionary *) attributes;
+- (void) handleEndGroupTags;
 @end
 
 @implementation SVGParser
@@ -218,31 +220,38 @@ static NSString *arcDirCharacters = @"01?";
 	return commands;
 }
 
-- (void) handleSvgStartTagUsingAttributes:(NSDictionary *) attributes {
-	
-}
-
-- (void) handleSvgEndTag{
-	
-}
-
-- (void) handleGStartTagUsingAttributes:(NSDictionary *) attributes {
-	SVGGroup *group = [[SVGGroup alloc] init];
+- (SVGGroup *) handleBeginGroupTagsUsingAttributes:(NSDictionary *) attributes {
+    SVGGroup *group = [[[SVGGroup alloc] init] autorelease];
 	group.groupId = [attributes objectForKey:@"id"];
 	group.style = [self handleStyleUsingAttributes:attributes];
 	group.transform = [self handleTransformUsingAttributes:attributes];
 	
 	[groups_ addObject:group];
-
 	[delegate_ parser:self didBeginGroup:group];
-	[group release];
+    return group;
 }
 
-- (void) handleGEndTag {	
+- (void) handleEndGroupTags {
 	SVGGroup *group = [groups_ lastObject];
 	[delegate_ parser:self didEndGroup:group];
 	
 	[groups_ removeLastObject];
+}
+
+- (void) handleSvgStartTagUsingAttributes:(NSDictionary *) attributes {
+    [self handleBeginGroupTagsUsingAttributes:attributes];
+}
+
+- (void) handleSvgEndTag{
+	[self handleEndGroupTags];
+}
+
+- (void) handleGStartTagUsingAttributes:(NSDictionary *) attributes {
+    [self handleBeginGroupTagsUsingAttributes:attributes];
+}
+
+- (void) handleGEndTag {	
+    [self handleEndGroupTags];
 }
 
 - (void) handlePathUsingAttributes:(NSDictionary *) attributes {

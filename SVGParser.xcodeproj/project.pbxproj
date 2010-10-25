@@ -42,6 +42,50 @@
 		BD84365C1251AE3D00C0472D /* SVGParser.m in Sources */ = {isa = PBXBuildFile; fileRef = BD84365A1251AE3D00C0472D /* SVGParser.m */; };
 		BD84365D1251AE3D00C0472D /* SVGParser.m in Sources */ = {isa = PBXBuildFile; fileRef = BD84365A1251AE3D00C0472D /* SVGParser.m */; };
 		BD84365E1251AE3D00C0472D /* SVGParser.h in Headers */ = {isa = PBXBuildFile; fileRef = BD84365B1251AE3D00C0472D /* SVGParser.h */; };
+		BDBF275F1273575700EEF6EF /* Arc.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF27481273575700EEF6EF /* Arc.svg */; };
+		BDBF27601273575700EEF6EF /* Bear01.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF27491273575700EEF6EF /* Bear01.svg */; };
+		BDBF27611273575700EEF6EF /* Bicyle01colored.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF274A1273575700EEF6EF /* Bicyle01colored.svg */; };
+		BDBF27621273575700EEF6EF /* Cat02.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF274B1273575700EEF6EF /* Cat02.svg */; };
+		BDBF27631273575700EEF6EF /* ClosedPath.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF274C1273575700EEF6EF /* ClosedPath.svg */; };
+		BDBF27641273575700EEF6EF /* Dog01.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF274D1273575700EEF6EF /* Dog01.svg */; };
+		BDBF27651273575700EEF6EF /* Giraffe01.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF274E1273575700EEF6EF /* Giraffe01.svg */; };
+		BDBF27661273575700EEF6EF /* House01.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF274F1273575700EEF6EF /* House01.svg */; };
+		BDBF27671273575700EEF6EF /* Bear01.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF27511273575700EEF6EF /* Bear01.svg */; };
+		BDBF27681273575700EEF6EF /* Bear02.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF27521273575700EEF6EF /* Bear02.svg */; };
+		BDBF27691273575700EEF6EF /* Debug.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF27531273575700EEF6EF /* Debug.svg */; };
+		BDBF276A1273575700EEF6EF /* Ellipse.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF27541273575700EEF6EF /* Ellipse.svg */; };
+		BDBF276B1273575700EEF6EF /* Polygon.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF27551273575700EEF6EF /* Polygon.svg */; };
+		BDBF276C1273575700EEF6EF /* Polyline.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF27561273575700EEF6EF /* Polyline.svg */; };
+		BDBF276D1273575700EEF6EF /* RoundedRect.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF27571273575700EEF6EF /* RoundedRect.svg */; };
+		BDBF276E1273575700EEF6EF /* TransformsAndGroups.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF27581273575700EEF6EF /* TransformsAndGroups.svg */; };
+		BDBF276F1273575700EEF6EF /* Triangle.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF27591273575700EEF6EF /* Triangle.svg */; };
+		BDBF27701273575700EEF6EF /* Princess01.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF275A1273575700EEF6EF /* Princess01.svg */; };
+		BDBF27711273575700EEF6EF /* Ship01.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF275B1273575700EEF6EF /* Ship01.svg */; };
+		BDBF27721273575700EEF6EF /* SimpleRect.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF275C1273575700EEF6EF /* SimpleRect.svg */; };
+		BDBF27731273575700EEF6EF /* SnowMan01colored.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF275D1273575700EEF6EF /* SnowMan01colored.svg */; };
+		BDBF27741273575700EEF6EF /* Truck01.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF275E1273575700EEF6EF /* Truck01.svg */; };
+		BDBF27751273575700EEF6EF /* Arc.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF27481273575700EEF6EF /* Arc.svg */; };
+		BDBF27761273575700EEF6EF /* Bear01.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF27491273575700EEF6EF /* Bear01.svg */; };
+		BDBF27771273575700EEF6EF /* Bicyle01colored.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF274A1273575700EEF6EF /* Bicyle01colored.svg */; };
+		BDBF27781273575700EEF6EF /* Cat02.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF274B1273575700EEF6EF /* Cat02.svg */; };
+		BDBF27791273575700EEF6EF /* ClosedPath.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF274C1273575700EEF6EF /* ClosedPath.svg */; };
+		BDBF277A1273575700EEF6EF /* Dog01.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF274D1273575700EEF6EF /* Dog01.svg */; };
+		BDBF277B1273575700EEF6EF /* Giraffe01.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF274E1273575700EEF6EF /* Giraffe01.svg */; };
+		BDBF277C1273575700EEF6EF /* House01.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF274F1273575700EEF6EF /* House01.svg */; };
+		BDBF277D1273575700EEF6EF /* Bear01.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF27511273575700EEF6EF /* Bear01.svg */; };
+		BDBF277E1273575700EEF6EF /* Bear02.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF27521273575700EEF6EF /* Bear02.svg */; };
+		BDBF277F1273575700EEF6EF /* Debug.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF27531273575700EEF6EF /* Debug.svg */; };
+		BDBF27801273575700EEF6EF /* Ellipse.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF27541273575700EEF6EF /* Ellipse.svg */; };
+		BDBF27811273575700EEF6EF /* Polygon.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF27551273575700EEF6EF /* Polygon.svg */; };
+		BDBF27821273575700EEF6EF /* Polyline.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF27561273575700EEF6EF /* Polyline.svg */; };
+		BDBF27831273575700EEF6EF /* RoundedRect.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF27571273575700EEF6EF /* RoundedRect.svg */; };
+		BDBF27841273575700EEF6EF /* TransformsAndGroups.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF27581273575700EEF6EF /* TransformsAndGroups.svg */; };
+		BDBF27851273575700EEF6EF /* Triangle.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF27591273575700EEF6EF /* Triangle.svg */; };
+		BDBF27861273575700EEF6EF /* Princess01.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF275A1273575700EEF6EF /* Princess01.svg */; };
+		BDBF27871273575700EEF6EF /* Ship01.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF275B1273575700EEF6EF /* Ship01.svg */; };
+		BDBF27881273575700EEF6EF /* SimpleRect.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF275C1273575700EEF6EF /* SimpleRect.svg */; };
+		BDBF27891273575700EEF6EF /* SnowMan01colored.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF275D1273575700EEF6EF /* SnowMan01colored.svg */; };
+		BDBF278A1273575700EEF6EF /* Truck01.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF275E1273575700EEF6EF /* Truck01.svg */; };
 		BDDF184B1269FE810099235A /* SVGView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDDF184A1269FE810099235A /* SVGView.m */; };
 		BDDF184C1269FE810099235A /* SVGView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDDF184A1269FE810099235A /* SVGView.m */; };
 		BDDF184D1269FE810099235A /* SVGView.h in Headers */ = {isa = PBXBuildFile; fileRef = BDDF18491269FE810099235A /* SVGView.h */; };
@@ -99,6 +143,28 @@
 		BD84363612519CB200C0472D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		BD84365A1251AE3D00C0472D /* SVGParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVGParser.m; sourceTree = "<group>"; };
 		BD84365B1251AE3D00C0472D /* SVGParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGParser.h; sourceTree = "<group>"; };
+		BDBF27481273575700EEF6EF /* Arc.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Arc.svg; sourceTree = "<group>"; };
+		BDBF27491273575700EEF6EF /* Bear01.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Bear01.svg; sourceTree = "<group>"; };
+		BDBF274A1273575700EEF6EF /* Bicyle01colored.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Bicyle01colored.svg; sourceTree = "<group>"; };
+		BDBF274B1273575700EEF6EF /* Cat02.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Cat02.svg; sourceTree = "<group>"; };
+		BDBF274C1273575700EEF6EF /* ClosedPath.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ClosedPath.svg; sourceTree = "<group>"; };
+		BDBF274D1273575700EEF6EF /* Dog01.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Dog01.svg; sourceTree = "<group>"; };
+		BDBF274E1273575700EEF6EF /* Giraffe01.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Giraffe01.svg; sourceTree = "<group>"; };
+		BDBF274F1273575700EEF6EF /* House01.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = House01.svg; sourceTree = "<group>"; };
+		BDBF27511273575700EEF6EF /* Bear01.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Bear01.svg; sourceTree = "<group>"; };
+		BDBF27521273575700EEF6EF /* Bear02.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Bear02.svg; sourceTree = "<group>"; };
+		BDBF27531273575700EEF6EF /* Debug.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Debug.svg; sourceTree = "<group>"; };
+		BDBF27541273575700EEF6EF /* Ellipse.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Ellipse.svg; sourceTree = "<group>"; };
+		BDBF27551273575700EEF6EF /* Polygon.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Polygon.svg; sourceTree = "<group>"; };
+		BDBF27561273575700EEF6EF /* Polyline.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Polyline.svg; sourceTree = "<group>"; };
+		BDBF27571273575700EEF6EF /* RoundedRect.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = RoundedRect.svg; sourceTree = "<group>"; };
+		BDBF27581273575700EEF6EF /* TransformsAndGroups.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TransformsAndGroups.svg; sourceTree = "<group>"; };
+		BDBF27591273575700EEF6EF /* Triangle.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Triangle.svg; sourceTree = "<group>"; };
+		BDBF275A1273575700EEF6EF /* Princess01.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Princess01.svg; sourceTree = "<group>"; };
+		BDBF275B1273575700EEF6EF /* Ship01.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Ship01.svg; sourceTree = "<group>"; };
+		BDBF275C1273575700EEF6EF /* SimpleRect.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SimpleRect.svg; sourceTree = "<group>"; };
+		BDBF275D1273575700EEF6EF /* SnowMan01colored.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SnowMan01colored.svg; sourceTree = "<group>"; };
+		BDBF275E1273575700EEF6EF /* Truck01.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Truck01.svg; sourceTree = "<group>"; };
 		BDDF18491269FE810099235A /* SVGView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGView.h; sourceTree = "<group>"; };
 		BDDF184A1269FE810099235A /* SVGView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVGView.m; sourceTree = "<group>"; };
 		BDDF1857126A12A00099235A /* SVGTransform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVGTransform.m; sourceTree = "<group>"; };
@@ -155,6 +221,7 @@
 		BD3F101E12501A0400ED816C = {
 			isa = PBXGroup;
 			children = (
+				BDBF2746127356D000EEF6EF /* TestResources */,
 				BD8435D61250629900C0472D /* UnitTestClasses */,
 				BD3F102512501A0400ED816C /* Classes */,
 				BD3F102612501A0400ED816C /* Other Sources */,
@@ -230,6 +297,52 @@
 				BD0D2ED2125FD32400127DAD /* Utils.m */,
 			);
 			path = UnitTestClasses;
+			sourceTree = "<group>";
+		};
+		BDBF2746127356D000EEF6EF /* TestResources */ = {
+			isa = PBXGroup;
+			children = (
+				BDBF27471273575700EEF6EF /* SVGFiles */,
+			);
+			name = TestResources;
+			path = SVGFiles;
+			sourceTree = "<group>";
+		};
+		BDBF27471273575700EEF6EF /* SVGFiles */ = {
+			isa = PBXGroup;
+			children = (
+				BDBF27481273575700EEF6EF /* Arc.svg */,
+				BDBF27491273575700EEF6EF /* Bear01.svg */,
+				BDBF274A1273575700EEF6EF /* Bicyle01colored.svg */,
+				BDBF274B1273575700EEF6EF /* Cat02.svg */,
+				BDBF274C1273575700EEF6EF /* ClosedPath.svg */,
+				BDBF274D1273575700EEF6EF /* Dog01.svg */,
+				BDBF274E1273575700EEF6EF /* Giraffe01.svg */,
+				BDBF274F1273575700EEF6EF /* House01.svg */,
+				BDBF27501273575700EEF6EF /* PathTests */,
+				BDBF275A1273575700EEF6EF /* Princess01.svg */,
+				BDBF275B1273575700EEF6EF /* Ship01.svg */,
+				BDBF275C1273575700EEF6EF /* SimpleRect.svg */,
+				BDBF275D1273575700EEF6EF /* SnowMan01colored.svg */,
+				BDBF275E1273575700EEF6EF /* Truck01.svg */,
+			);
+			name = SVGFiles;
+			sourceTree = "<group>";
+		};
+		BDBF27501273575700EEF6EF /* PathTests */ = {
+			isa = PBXGroup;
+			children = (
+				BDBF27511273575700EEF6EF /* Bear01.svg */,
+				BDBF27521273575700EEF6EF /* Bear02.svg */,
+				BDBF27531273575700EEF6EF /* Debug.svg */,
+				BDBF27541273575700EEF6EF /* Ellipse.svg */,
+				BDBF27551273575700EEF6EF /* Polygon.svg */,
+				BDBF27561273575700EEF6EF /* Polyline.svg */,
+				BDBF27571273575700EEF6EF /* RoundedRect.svg */,
+				BDBF27581273575700EEF6EF /* TransformsAndGroups.svg */,
+				BDBF27591273575700EEF6EF /* Triangle.svg */,
+			);
+			path = PathTests;
 			sourceTree = "<group>";
 		};
 		BDDF18481269FE5C0099235A /* Views */ = {
@@ -348,6 +461,28 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDBF27751273575700EEF6EF /* Arc.svg in Resources */,
+				BDBF27761273575700EEF6EF /* Bear01.svg in Resources */,
+				BDBF27771273575700EEF6EF /* Bicyle01colored.svg in Resources */,
+				BDBF27781273575700EEF6EF /* Cat02.svg in Resources */,
+				BDBF27791273575700EEF6EF /* ClosedPath.svg in Resources */,
+				BDBF277A1273575700EEF6EF /* Dog01.svg in Resources */,
+				BDBF277B1273575700EEF6EF /* Giraffe01.svg in Resources */,
+				BDBF277C1273575700EEF6EF /* House01.svg in Resources */,
+				BDBF277D1273575700EEF6EF /* Bear01.svg in Resources */,
+				BDBF277E1273575700EEF6EF /* Bear02.svg in Resources */,
+				BDBF277F1273575700EEF6EF /* Debug.svg in Resources */,
+				BDBF27801273575700EEF6EF /* Ellipse.svg in Resources */,
+				BDBF27811273575700EEF6EF /* Polygon.svg in Resources */,
+				BDBF27821273575700EEF6EF /* Polyline.svg in Resources */,
+				BDBF27831273575700EEF6EF /* RoundedRect.svg in Resources */,
+				BDBF27841273575700EEF6EF /* TransformsAndGroups.svg in Resources */,
+				BDBF27851273575700EEF6EF /* Triangle.svg in Resources */,
+				BDBF27861273575700EEF6EF /* Princess01.svg in Resources */,
+				BDBF27871273575700EEF6EF /* Ship01.svg in Resources */,
+				BDBF27881273575700EEF6EF /* SimpleRect.svg in Resources */,
+				BDBF27891273575700EEF6EF /* SnowMan01colored.svg in Resources */,
+				BDBF278A1273575700EEF6EF /* Truck01.svg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,6 +490,28 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDBF275F1273575700EEF6EF /* Arc.svg in Resources */,
+				BDBF27601273575700EEF6EF /* Bear01.svg in Resources */,
+				BDBF27611273575700EEF6EF /* Bicyle01colored.svg in Resources */,
+				BDBF27621273575700EEF6EF /* Cat02.svg in Resources */,
+				BDBF27631273575700EEF6EF /* ClosedPath.svg in Resources */,
+				BDBF27641273575700EEF6EF /* Dog01.svg in Resources */,
+				BDBF27651273575700EEF6EF /* Giraffe01.svg in Resources */,
+				BDBF27661273575700EEF6EF /* House01.svg in Resources */,
+				BDBF27671273575700EEF6EF /* Bear01.svg in Resources */,
+				BDBF27681273575700EEF6EF /* Bear02.svg in Resources */,
+				BDBF27691273575700EEF6EF /* Debug.svg in Resources */,
+				BDBF276A1273575700EEF6EF /* Ellipse.svg in Resources */,
+				BDBF276B1273575700EEF6EF /* Polygon.svg in Resources */,
+				BDBF276C1273575700EEF6EF /* Polyline.svg in Resources */,
+				BDBF276D1273575700EEF6EF /* RoundedRect.svg in Resources */,
+				BDBF276E1273575700EEF6EF /* TransformsAndGroups.svg in Resources */,
+				BDBF276F1273575700EEF6EF /* Triangle.svg in Resources */,
+				BDBF27701273575700EEF6EF /* Princess01.svg in Resources */,
+				BDBF27711273575700EEF6EF /* Ship01.svg in Resources */,
+				BDBF27721273575700EEF6EF /* SimpleRect.svg in Resources */,
+				BDBF27731273575700EEF6EF /* SnowMan01colored.svg in Resources */,
+				BDBF27741273575700EEF6EF /* Truck01.svg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
