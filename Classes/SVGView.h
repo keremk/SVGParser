@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "SVGRenderer.h"
 
 @interface SVGView : UIView {
-
+    SVGRenderer *renderer_;
+    CGFloat scaleX_, scaleY_;
 }
+
+- (void) loadViewUsingSVGRenderer:(SVGRenderer *) renderer;
 
 @end

@@ -38,18 +38,21 @@ static NSString *basePath = @"/Users/kkaratal/Developer/IPhone/Projects/SVGParse
 	for (NSInteger i = 0; i < [testFilenames count]; i++) {
 		NSString *testSVGFilename = [testFilenames objectAtIndex:i];
 		NSURL *svgUrl = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/PathTests/%@", basePath, testSVGFilename]];
-		SVGParser *svgParser = [[SVGParser alloc] initWithContentsOfUrl:svgUrl];
-		SVGRenderer *svgRenderer = [[SVGRenderer alloc] initWithParser:svgParser];
+//		SVGParser *svgParser = [[SVGParser alloc] initWithContentsOfUrl:svgUrl];
+//		SVGRenderer *svgRenderer = [[SVGRenderer alloc] initWithParser:svgParser];
+        SVGRenderer *svgRenderer = [[SVGRenderer alloc] initWithContentsOfURL:svgUrl];
 		
-		CGContextRef context = CreateBitmapContext(1024, 1024);
-		
+//		CGContextRef context = CreateBitmapContext(1024, 1024);
+		CGContextRef context = CreateBitmapContext(svgRenderer.boundingBox.size.width, svgRenderer.boundingBox.size.height);
+
+		[svgRenderer parseSVG];
 		[svgRenderer renderInContext:context];
 
 		NSURL *imageDataUrl = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/PathTests/%@.png", basePath, testSVGFilename]];
 		SaveBitmapContextAsFile(context, imageDataUrl);
 		
 		[svgRenderer release];
-		[svgParser release];
+//		[svgParser release];
 	}
 }
 
@@ -59,18 +62,20 @@ static NSString *basePath = @"/Users/kkaratal/Developer/IPhone/Projects/SVGParse
 	for (NSInteger i = 0; i < [testFilenames count]; i++) {
 		NSString *testSVGFilename = [testFilenames objectAtIndex:i];
 		NSURL *svgUrl = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/PathTests/%@", basePath, testSVGFilename]];
-		SVGParser *svgParser = [[SVGParser alloc] initWithContentsOfUrl:svgUrl];
-		SVGRenderer *svgRenderer = [[SVGRenderer alloc] initWithParser:svgParser];
+//		SVGParser *svgParser = [[SVGParser alloc] initWithContentsOfUrl:svgUrl];
+//		SVGRenderer *svgRenderer = [[SVGRenderer alloc] initWithParser:svgParser];
+        SVGRenderer *svgRenderer = [[SVGRenderer alloc] initWithContentsOfURL:svgUrl];
+
+		[svgRenderer parseSVG];		
 		
-		CGContextRef context = CreateBitmapContext(1024, 1024);
-		
+		CGContextRef context = CreateBitmapContext(svgRenderer.boundingBox.size.width, svgRenderer.boundingBox.size.height);
 		[svgRenderer renderInContext:context];
 		
 		NSURL *imageDataUrl = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/PathTests/%@.png", basePath, testSVGFilename]];
 		SaveBitmapContextAsFile(context, imageDataUrl);
 		
 		[svgRenderer release];
-		[svgParser release];
+//		[svgParser release];
 	}
 }
 

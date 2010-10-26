@@ -14,7 +14,6 @@
 #import "CVPathGroup.h"
 
 @interface SVGRenderer : NSObject<SVGParserDelegate> {
-//	CGContextRef context_;
 	SVGParser *parser_;
 	CVPathGroup *renderTree_;
 	NSMutableArray *groupStack_;
@@ -30,6 +29,10 @@
 
 - (void) renderInContext:(CGContextRef) context;
 - (id) initWithParser:(SVGParser *)parser;
+- (id) initWithContentsOfURL:(NSURL *) url;
+- (void) parseSVG;
 
 @property (nonatomic, retain) CVPathGroup *renderTree;
+@property (nonatomic, readonly) CGRect boundingBox;
+@property (nonatomic, readonly) CGRect viewBox;
 @end

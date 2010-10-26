@@ -40,6 +40,24 @@
 	return self;
 }
 
+- (id) initWithContentsOfURL:(NSURL *) url {
+	self = [super init];
+	if (self != nil) {
+		self.parser = [[SVGParser alloc] initWithContentsOfUrl:url];
+		[self.parser setDelegate:self];
+		renderTree_ = nil;
+		groupStack_ = nil;
+	}
+	return self;
+}
+
+- (CGRect) boundingBox {
+    return parser_.boundingBox;
+}
+
+- (CGRect) viewBox {
+    return parser_.viewBox;
+}
 
 - (CGPathRef) newPathUsingSVGPath:(NSArray *) path usingTransform:(SVGTransform) transform {
 	CGMutablePathRef cgPath = CGPathCreateMutable();
@@ -148,12 +166,17 @@
 	return cgPath;	
 }
 
+- (void) parseSVG {
+    if (nil == renderTree_) {
+        [self.parser parse];
+    }
+}
+
 - (void) renderInContext:(CGContextRef) context {
-	[self setSVGStyleDefaultsInContext:context];
-	if (nil == renderTree_) {
-		[self.parser parse];
+	if (nil != renderTree_) {
+        [self setSVGStyleDefaultsInContext:context];
+        [renderTree_ renderInContext:context];
 	}
-	[renderTree_ renderInContext:context];
 }
 
 

@@ -61,6 +61,7 @@ typedef enum SVGBezierType {
 @implementation SVGParser
 @synthesize xmlParser = xmlParser_;
 @synthesize delegate = delegate_;
+@synthesize boundingBox = boundingBox_, viewBox = viewBox_;
 
 - (void) dealloc {
     [xmlParser_ release], xmlParser_ = nil;
@@ -94,6 +95,8 @@ typedef enum SVGBezierType {
 }
 
 - (void) initParser {
+    boundingBox_ = CGRectMake(0.0f, 0.0f, 320.0f, 460.0f);
+    viewBox_ = boundingBox_;
     [xmlParser_ setDelegate:self];
     svgElements_ = [[NSArray alloc] initWithObjects:@"path", @"circle", @"ellipse", @"line", @"polyline", @"rect", @"polygon", @"image", nil];
     svgContainerElements_ = [[NSArray alloc] initWithObjects:@"svg", @"g", nil]; 
@@ -240,6 +243,26 @@ static NSString *arcDirCharacters = @"01?";
 
 - (void) handleSvgStartTagUsingAttributes:(NSDictionary *) attributes {
     [self handleBeginGroupTagsUsingAttributes:attributes];
+    
+    CGFloat x, y, width, height;
+    NSString *stringVal = [attributes objectForKey:@"x"];
+    if (nil != stringVal) {
+        x = [stringVal floatValue];
+    }
+    stringVal = [attributes objectForKey:@"y"];
+    if (nil != stringVal) {
+        y = [stringVal floatValue];
+    }
+    stringVal = [attributes objectForKey:@"width"];
+    if (nil != stringVal) {
+        width = [stringVal floatValue];
+    }
+    stringVal = [attributes objectForKey:@"height"];
+    if (nil != stringVal) {
+        height = [stringVal floatValue];
+    }
+    boundingBox_ = CGRectMake(x, y, width, height);
+    
 }
 
 - (void) handleSvgEndTag{
@@ -719,8 +742,6 @@ static NSString *arcDirCharacters = @"01?";
 }
 
 - (NSDictionary *) handleStyleUsingAttributes:(NSDictionary *) attributes {
-//	SVGStyle *style = [[[SVGStyle alloc] init] autorelease];
-	
 	NSMutableDictionary *style = [NSMutableDictionary dictionary];
 	NSString *styleString = [attributes objectForKey:@"style"];
 	if (nil == styleString) {
@@ -744,62 +765,6 @@ static NSString *arcDirCharacters = @"01?";
 
 	return style;
 }
-//	NSString *styleString = [attributes objectForKey:@"style"];
-//	if (styleString == nil) {
-//		styleAttributes = [NSArray arrayWithObjects:@"opacity", @"fill", @"fill-rule", @"fill-opacity",
-//						   @"stroke", @"stroke-width", @"stroke-linecap", @"stroke-linejoin", 
-//						   @"stroke-miterlimit", @"stroke-dasharray", nil];		
-//		styleValues = [attributes objectsForKeys:styleAttributes notFoundMarker:notFound];
-//	} else {
-//		styleValues = [NSMutableArray array];
-//		styleAttributes = [NSMutableArray array];
-//		NSArray *stylesMentionedInString = [styleString componentsSeparatedByString:@";"];
-//		for (NSString *styleString in stylesMentionedInString) {
-//			NSArray *comps = [styleString componentsSeparatedByString:@":"];
-//			if ([comps count] == 2) {
-//				[styleAttributes addObject:[comps objectAtIndex:0]];
-//				[styleValues addObject:[comps objectAtIndex:1]];
-//			}
-//		}
-//	}
-
-//	NSUInteger count = [styleAttributes count];
-//	for (NSInteger i = 0; i < count; i++) {
-//		NSString *styleName = [styleAttributes objectAtIndex:i];
-//		NSString *styleValue = [styleValues objectAtIndex:i];
-//		
-//		if (![styleValue isEqualToString:notFound]) { 
-//			if ([styleName isEqualToString:@"fill"]) {
-//				style.fillColor = [self parseColorFromString:styleValue];
-//			} else if ([styleName isEqualToString:@"stroke"]) {
-//				style.strokeColor = [self parseColorFromString:styleValue];
-//			} else if ([styleName isEqualToString:@"stroke-width"]) {
-//				style.strokeWidth = [styleValue floatValue];
-//			} else if ([styleName isEqualToString:@"stroke-linecap"]) {
-//				if ([styleValue isEqualToString:@"butt"]) {
-//					style.strokeLineCap = LineCapButt;
-//				} else if ([styleValue isEqualToString:@"round"]) {
-//					style.strokeLineCap = LineCapRound;
-//				} else if ([styleValue isEqualToString:@"square"]) {
-//					style.strokeLineCap	= LineCapSquare;
-//				}
-//			} else if ([styleName isEqualToString:@"stroke-linejoin"]) {
-//				if ([styleValue isEqualToString:@"miter"]) {
-//					style.strokeLineJoin = LineJoinMiter;
-//				} else if ([styleValue isEqualToString:@"round"]) {
-//					style.strokeLineJoin = LineJoinRound;
-//				} else if ([styleValue isEqualToString:@"bevel"]) {
-//					style.strokeLineJoin = LineJoinBevel;
-//				}				
-//			} else if ([styleName isEqualToString:@"stroke-miterlimit"]) {
-//				style.strokeMiterLimit = [styleValue floatValue];
-//			}	
-//		}
-//	}
-//	
-//	return style;
-//}
-
 
 #define NUM_MATRIX_ELEMS 6
 

@@ -39,6 +39,9 @@
 	CGPoint initialPoint_;
 	BOOL isTherePreviousCubicControlPoint_, isTherePreviousQuadraticControlPoint_;
 	CGPoint previousCubicControlPoint_, previousQuadraticControlPoint_;
+    
+    CGRect boundingBox_;
+    CGRect viewBox_;
 }
 
 - (id) initWithContentsOfUrl:(NSURL *) url;
@@ -46,6 +49,8 @@
 - (BOOL) parse;
 
 @property(nonatomic, assign) id<SVGParserDelegate> delegate;
+@property (nonatomic) CGRect boundingBox;
+@property (nonatomic) CGRect viewBox;
 
 @end
 
