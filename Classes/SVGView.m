@@ -41,7 +41,7 @@
         CATiledLayer *tempTiledLayer = (CATiledLayer*) self.layer;
         tempTiledLayer.levelsOfDetail = 5;
         tempTiledLayer.levelsOfDetailBias = 2;
-        self.opaque=YES;
+        self.opaque = YES;
     }
     return self;
 }
@@ -83,7 +83,7 @@
     // eliminate the following two lines of code
     // and set the scroll view background color
 
-    if (nil != renderer_) {
+    if (nil != self.renderer) {
         [self.renderer renderInContext:context];
     }
     

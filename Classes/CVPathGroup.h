@@ -9,17 +9,25 @@
 #import <Foundation/Foundation.h>
 #import "SVGShapes.h"
 #import "SVGTransform.h"
+#import "CVPathProtocol.h"
+#import "CVPath.h"
 
-@interface CVPathGroup : NSObject {
+@class CVPath;
+
+@interface CVPathGroup : NSObject<CVPathProtocol> {
 	NSMutableArray *pathsAndGroups_;
 	NSDictionary *style_;
 	SVGTransform transform_;
+    CGRect boundingBox_;
 }
 
 - (id) initWithStyle:(NSDictionary *) style transform:(SVGTransform) transform;
-- (void) renderInContext:(CGContextRef) context;
+- (void) addCVPath:(CVPath *) cvPath;
+- (void) addCVPathGroup:(CVPathGroup *) cvPathGroup;
+
 @property (nonatomic, readonly) NSDictionary *style;
 @property (nonatomic, readonly) SVGTransform transform;
-@property (nonatomic, readonly) NSMutableArray *pathsAndGroups;
+@property (nonatomic, readonly) CGRect boundingBox;
+//@property (nonatomic, readonly) NSMutableArray *pathsAndGroups;
 
 @end

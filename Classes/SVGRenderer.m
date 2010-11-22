@@ -227,7 +227,7 @@
 		[groupStack_ addObject:renderTree_];
 	} else {
 		CVPathGroup *newPathGroup = [[CVPathGroup alloc] initWithStyle:group.style transform:group.transform];		
-		[[[groupStack_ lastObject] pathsAndGroups] addObject:newPathGroup];
+		[[groupStack_ lastObject] addCVPathGroup:newPathGroup];
 		[groupStack_ addObject:newPathGroup];
 		[newPathGroup release];
 	}
@@ -237,9 +237,9 @@
 	[groupStack_ removeLastObject];
 }
 
-- (void) convertToCVPathUsingStyle: (NSDictionary *) style fromCGPath: (CGPathRef) cgPath  {
+- (void) convertToCVPathUsingStyle:(NSDictionary *) style fromCGPath:(CGPathRef) cgPath  {
 	CVPath *cvPath = [[CVPath alloc] initWithPath:cgPath style:style];	
-	[[[groupStack_ lastObject] pathsAndGroups] addObject:cvPath];
+	[[groupStack_ lastObject] addCVPath:cvPath];
 	[cvPath release];
 }
 

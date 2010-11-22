@@ -48,6 +48,27 @@
 	return self;
 }
 
+- (BOOL) containsPoint:(CGPoint) point {
+    
+    return CGPathContainsPoint(path_, NULL, point, TRUE);
+}
+
+- (NSArray *) allPathsWhichContainsPoint:(CGPoint) point {
+    NSMutableArray *allPaths = [NSMutableArray array];
+    if (CGPathContainsPoint(path_, NULL, point, TRUE)) {
+        [allPaths addObject:self];
+    }
+    return allPaths;
+}
+
+- (CVPath *) topMostPathWhichContainsPoint:(CGPoint) point {
+    if (CGPathContainsPoint(path_, NULL, point, TRUE)) {
+        return self;
+    } else {
+        return nil;
+    }
+}
+
 - (void) renderInContext:(CGContextRef) context {
 	CGContextSaveGState(context);
 	[SVGStyleHelper setContext:context usingStyle:style_];

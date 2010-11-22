@@ -34,6 +34,7 @@
 		BD0D2ED3125FD32400127DAD /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0D2ED2125FD32400127DAD /* Utils.m */; };
 		BD0D2ED4125FD32400127DAD /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0D2ED2125FD32400127DAD /* Utils.m */; };
 		BD3F102F12501A0400ED816C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD3F102E12501A0400ED816C /* Foundation.framework */; };
+		BD7E8C71129ACF4D0043E373 /* CVPathProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = BD7E8C70129ACF4D0043E373 /* CVPathProtocol.h */; };
 		BD8435D9125062EA00C0472D /* SVGParserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8435D8125062EA00C0472D /* SVGParserTest.m */; };
 		BD8435DE12506C7000C0472D /* SVGGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8435DD12506C7000C0472D /* SVGGroup.m */; };
 		BD8435DF12506C7000C0472D /* SVGGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = BD8435DC12506C7000C0472D /* SVGGroup.h */; };
@@ -86,6 +87,10 @@
 		BDBF27881273575700EEF6EF /* SimpleRect.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF275C1273575700EEF6EF /* SimpleRect.svg */; };
 		BDBF27891273575700EEF6EF /* SnowMan01colored.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF275D1273575700EEF6EF /* SnowMan01colored.svg */; };
 		BDBF278A1273575700EEF6EF /* Truck01.svg in Resources */ = {isa = PBXBuildFile; fileRef = BDBF275E1273575700EEF6EF /* Truck01.svg */; };
+		BDBF291A127FCBB900EEF6EF /* SVGViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = BDBF2918127FCBB900EEF6EF /* SVGViewController.h */; };
+		BDBF291B127FCBB900EEF6EF /* SVGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBF2919127FCBB900EEF6EF /* SVGViewController.m */; };
+		BDBF291C127FCBB900EEF6EF /* SVGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBF2919127FCBB900EEF6EF /* SVGViewController.m */; };
+		BDBF291D127FCBB900EEF6EF /* SVGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBF2919127FCBB900EEF6EF /* SVGViewController.m */; };
 		BDDF184B1269FE810099235A /* SVGView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDDF184A1269FE810099235A /* SVGView.m */; };
 		BDDF184C1269FE810099235A /* SVGView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDDF184A1269FE810099235A /* SVGView.m */; };
 		BDDF184D1269FE810099235A /* SVGView.h in Headers */ = {isa = PBXBuildFile; fileRef = BDDF18491269FE810099235A /* SVGView.h */; };
@@ -134,6 +139,7 @@
 		BD3F102C12501A0400ED816C /* libSVGParser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSVGParser.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD3F102E12501A0400ED816C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BD3F103012501A0400ED816C /* SVGParser_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SVGParser_Prefix.pch; sourceTree = "<group>"; };
+		BD7E8C70129ACF4D0043E373 /* CVPathProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVPathProtocol.h; sourceTree = "<group>"; };
 		BD8435CE1250627F00C0472D /* SVGUnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SVGUnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD8435CF1250627F00C0472D /* SVGUnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SVGUnitTests-Info.plist"; sourceTree = "<group>"; };
 		BD8435D7125062EA00C0472D /* SVGParserTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGParserTest.h; sourceTree = "<group>"; };
@@ -165,6 +171,8 @@
 		BDBF275C1273575700EEF6EF /* SimpleRect.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SimpleRect.svg; sourceTree = "<group>"; };
 		BDBF275D1273575700EEF6EF /* SnowMan01colored.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SnowMan01colored.svg; sourceTree = "<group>"; };
 		BDBF275E1273575700EEF6EF /* Truck01.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Truck01.svg; sourceTree = "<group>"; };
+		BDBF2918127FCBB900EEF6EF /* SVGViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGViewController.h; sourceTree = "<group>"; };
+		BDBF2919127FCBB900EEF6EF /* SVGViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVGViewController.m; sourceTree = "<group>"; };
 		BDDF18491269FE810099235A /* SVGView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGView.h; sourceTree = "<group>"; };
 		BDDF184A1269FE810099235A /* SVGView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVGView.m; sourceTree = "<group>"; };
 		BDDF1857126A12A00099235A /* SVGTransform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVGTransform.m; sourceTree = "<group>"; };
@@ -253,6 +261,7 @@
 				BDDF1870126BCBB50099235A /* CVPathGroup.m */,
 				BDDF1875126BCBED0099235A /* CVPath.h */,
 				BDDF1876126BCBED0099235A /* CVPath.m */,
+				BD7E8C70129ACF4D0043E373 /* CVPathProtocol.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -350,6 +359,8 @@
 			children = (
 				BDDF18491269FE810099235A /* SVGView.h */,
 				BDDF184A1269FE810099235A /* SVGView.m */,
+				BDBF2918127FCBB900EEF6EF /* SVGViewController.h */,
+				BDBF2919127FCBB900EEF6EF /* SVGViewController.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -370,6 +381,8 @@
 				BDDF184D1269FE810099235A /* SVGView.h in Headers */,
 				BDDF1873126BCBB50099235A /* CVPathGroup.h in Headers */,
 				BDDF1879126BCBED0099235A /* CVPath.h in Headers */,
+				BDBF291A127FCBB900EEF6EF /* SVGViewController.h in Headers */,
+				BD7E8C71129ACF4D0043E373 /* CVPathProtocol.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,6 +563,7 @@
 				BDDF1859126A12A00099235A /* SVGTransform.m in Sources */,
 				BDDF1872126BCBB50099235A /* CVPathGroup.m in Sources */,
 				BDDF1878126BCBED0099235A /* CVPath.m in Sources */,
+				BDBF291C127FCBB900EEF6EF /* SVGViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -566,6 +580,7 @@
 				BDDF185A126A12A00099235A /* SVGTransform.m in Sources */,
 				BDDF1874126BCBB50099235A /* CVPathGroup.m in Sources */,
 				BDDF187A126BCBED0099235A /* CVPath.m in Sources */,
+				BDBF291B127FCBB900EEF6EF /* SVGViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -585,6 +600,7 @@
 				BDDF1858126A12A00099235A /* SVGTransform.m in Sources */,
 				BDDF1871126BCBB50099235A /* CVPathGroup.m in Sources */,
 				BDDF1877126BCBED0099235A /* CVPath.m in Sources */,
+				BDBF291D127FCBB900EEF6EF /* SVGViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

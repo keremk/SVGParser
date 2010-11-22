@@ -301,8 +301,8 @@ static NSString *arcDirCharacters = @"01?";
 		unichar pathChar = command.command;
 		NSString *pathElementString = [NSString stringWithCharacters:command.coords length:command.coordsLength - 1];
 		
-		size_t dummyLen = [pathElementString length];
-		NSLog(@"%d", dummyLen);
+//		size_t dummyLen = [pathElementString length];
+//		NSLog(@"%d", dummyLen);
 		BOOL isRelative = NO;
 		NSScanner *scanner = [NSScanner scannerWithString:pathElementString];
 		[scanner setCharactersToBeSkipped:charsToBeSkipped];
